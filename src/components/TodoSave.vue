@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from 'vue';
-// import { onBeforeMount } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps({
   message:{
@@ -9,19 +9,16 @@ const props = defineProps({
   },
 });
 
-const save = () => {
+const displayMessage = computed(() => {
   localStorage.setItem("message", props.message);
-  
-};
-
-
+  return props.message;
+});
 </script>
 
 
 <template>
   <div>
-    <button type="button" @click="save">Add</button>
-    <p>This vue template doesn't need 'template'. So, this will be remoded later. </p>
+    <p> {{ displayMessage }} </p>
   </div>
 </template>
 

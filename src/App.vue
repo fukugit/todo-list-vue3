@@ -4,7 +4,8 @@
   <TodoInput @set-message="setMessage"></TodoInput>
   <!-- props -->
   <TodoSave :message="message"></TodoSave>
-  <TodoList></TodoList>
+  <!-- props -->
+  <TodoList :message="message"></TodoList>
 
 
 </template>

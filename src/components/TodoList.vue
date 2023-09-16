@@ -1,10 +1,21 @@
 <script setup>
 import { ref } from 'vue';
+import { defineProps } from 'vue';
+import { computed } from 'vue';
 
-let message = ref("");
-const show = () => {
-  message.value = localStorage.getItem("message");
-};
+let oldMessage = ref("aaa");
+
+const props = defineProps({
+  message:{
+    type: String,
+    requirerd: true,
+  },
+});
+
+const displayNewMessage = computed(() => {
+  oldMessage = "bbbb";
+  return props.message;
+});
 
 
 </script>
@@ -12,9 +23,9 @@ const show = () => {
 
 <template>
   <div>
-    <button type="button" @click="show">Show</button>
-    <ul>
-      <li >{{ message }}</li>
+    <ul v-if="displayNewMessage != ''">
+      <li >{{ displayNewMessage }}</li>
+      <li >{{ oldMessage }}</li>
     </ul>
   </div>
 </template>
