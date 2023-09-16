@@ -3,7 +3,8 @@ import { ref } from 'vue';
 import { defineProps } from 'vue';
 import { computed } from 'vue';
 
-let oldMessage = ref("aaa");
+// let oldMessage = ref("aaa");
+let oldMessages = ref([]);
 
 const props = defineProps({
   message:{
@@ -13,7 +14,7 @@ const props = defineProps({
 });
 
 const displayNewMessage = computed(() => {
-  oldMessage = "bbbb";
+  oldMessages = JSON.parse(localStorage.getItem('message'));
   return props.message;
 });
 
@@ -23,10 +24,13 @@ const displayNewMessage = computed(() => {
 
 <template>
   <div>
-    <ul v-if="displayNewMessage != ''">
-      <li >{{ displayNewMessage }}</li>
+    <ul class="red" v-if="displayNewMessage != ''">
+      <li >Your latest input : {{ displayNewMessage }}</li>
+    </ul>
+    <ul v-for="oldMessage in oldMessages" :key="oldMessage">
       <li >{{ oldMessage }}</li>
     </ul>
+
   </div>
 </template>
 
@@ -35,5 +39,8 @@ const displayNewMessage = computed(() => {
     border: yellowgreen solid;
     padding: 10px;
     margin-bottom: 10px;
+  }
+  .red {
+    color: red;
   }
 </style>

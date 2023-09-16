@@ -1,6 +1,13 @@
 <script setup>
+// import { ref } from 'vue';
 import { defineProps } from 'vue';
 import { computed } from 'vue';
+
+// const messages = ref([
+//   'タスクA',
+//   'タスクB',
+//   'タスクC',
+// ]);
 
 const props = defineProps({
   message:{
@@ -10,7 +17,21 @@ const props = defineProps({
 });
 
 const displayMessage = computed(() => {
-  localStorage.setItem("message", props.message);
+  if (props.message == '') {
+    return props.message;
+  }
+
+  let messages = JSON.parse(localStorage.getItem('message'));
+  if (messages == null) {
+    messages = [];
+  }
+  messages.push(props.message);
+  localStorage.setItem("message", JSON.stringify(messages));
+
+  messages = messages.filter(function(x){
+    return !(x === null || x === undefined || x === ""); 
+  });
+
   return props.message;
 });
 </script>
