@@ -39,6 +39,8 @@ jobs:
       repository-projects: write
       security-events: write
       statuses: write
+      pages: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
