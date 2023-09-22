@@ -22,7 +22,7 @@ const displayMessage = computed(() => {
 
 <template>
   <div>
-    <input type="text" v-model="messageInput"><p>Your input : {{ displayMessage }}</p>
+    <input type="text" v-model.lazy="messageInput"><p>Your input : {{ displayMessage }}</p>
     <button type="button" @click="addTodo">Add</button>
   </div>
 </template>
