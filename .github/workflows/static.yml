@@ -35,6 +35,8 @@ jobs:
         uses: actions/configure-pages@v3
       - run: npm ci
       - run: npm run build
+      - run: git config user.name github-actions
+      - run: git config user.email github-actions@github.com
       - run: git add .
       - run: git commit -m "Add dist" -a
       - run: git pull
@@ -43,7 +45,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: './dist'
+          path: 'todo-list-vue3/dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
