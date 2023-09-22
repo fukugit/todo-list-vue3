@@ -35,12 +35,10 @@ jobs:
         uses: actions/configure-pages@v3
       - run: npm ci
       - run: npm run build
-      - name: Commit files
-        run: |
-        git add .
-        git commit -m "Add dist" -a
-        git pull
-        git push origin main
+      - run: git add .
+      - run: git commit -m "Add dist" -a
+      - run: git pull
+      - run: git push origin main
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
