@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import { defineProps } from 'vue';
 import { computed } from 'vue';
 
-// let oldMessage = ref("aaa");
 let oldMessages = ref([]);
 
 const props = defineProps({
@@ -11,13 +10,25 @@ const props = defineProps({
     type: String,
     requirerd: true,
   },
+  allMessageRemovedFlag: {
+    type: Boolean,
+    default: false,
+    requirerd: false,
+  }
 });
 
-const displayNewMessage = computed(() => {
+let displayNewMessage = computed(() => {
   oldMessages = JSON.parse(localStorage.getItem('message'));
   return props.message;
 });
 
+const isDispay = computed(() => {
+  if (props.allMessageRemovedFlag == true)  {
+    oldMessages = JSON.parse(localStorage.getItem('message'));
+    return false;
+  }
+  return true;
+});
 
 </script>
 
@@ -27,15 +38,23 @@ const displayNewMessage = computed(() => {
     <ul class="red" v-if="displayNewMessage != ''">
       <li >Your latest input : {{ displayNewMessage }}</li>
     </ul>
-    <ul v-for="oldMessage in oldMessages" :key="oldMessage">
-      <li >{{ oldMessage }}</li>
-    </ul>
+    <div v-if="isDispay === true" class="li">
+      <ul v-for="oldMessage in oldMessages" :key="oldMessage">
+        <li >{{ oldMessage }}</li>
+      </ul>
+    </div>
+    <div v-else-if="isDispay === false" class="li">
+      <ul v-for="oldMessage in displayOldMessage" :key="oldMessage">
+        <li >{{ oldMessage }}</li>
+      </ul>
+    </div>
+
 
   </div>
 </template>
 
 <style scoped>
-  div {
+  .li {
     border: yellowgreen solid;
     padding: 10px;
     margin-bottom: 10px;

@@ -3,12 +3,6 @@
 import { defineProps } from 'vue';
 import { computed } from 'vue';
 
-// const messages = ref([
-//   'タスクA',
-//   'タスクB',
-//   'タスクC',
-// ]);
-
 const props = defineProps({
   message:{
     type: String,
