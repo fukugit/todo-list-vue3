@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>This is Header</h1>
+    <h1 id="main-header">This is Header</h1>
   </header>
 </template>
 
@@ -9,5 +9,9 @@
     border: red solid;
     padding: 10px;
     margin-bottom: 10px;
+  }
+  h1 {
+    display: inline;
+    padding: 10px;
   }
 </style>

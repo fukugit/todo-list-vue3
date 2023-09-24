@@ -22,7 +22,6 @@ import TodoList from "./components/TodoList.vue";
 import TodoRemove from "./components/TodoRemove.vue";
 import TodoFooter from "./components/TodoFooter.vue";
 
-
 export default {
   data() {
     return {

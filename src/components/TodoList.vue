@@ -36,7 +36,7 @@ const isDispay = computed(() => {
 <template>
   <div>
     <ul class="red" v-if="displayNewMessage != ''">
-      <li >Your latest input : {{ displayNewMessage }}</li>
+      <li id="current-input">Your latest input : {{ displayNewMessage }}</li>
     </ul>
     <div v-if="isDispay === true" class="li">
       <ul v-for="oldMessage in oldMessages" :key="oldMessage">
