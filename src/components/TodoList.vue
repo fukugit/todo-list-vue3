@@ -10,7 +10,7 @@ const props = defineProps({
     type: String,
     requirerd: true,
   },
-  allMessageRemovedFlag: {
+  isRemovedFlag: {
     type: Boolean,
     default: false,
     requirerd: false,
@@ -23,7 +23,7 @@ let displayNewMessage = computed(() => {
 });
 
 const isDispay = computed(() => {
-  if (props.allMessageRemovedFlag == true)  {
+  if (props.isRemovedFlag == true)  {
     oldMessages = JSON.parse(localStorage.getItem('message'));
     return false;
   }

@@ -5,9 +5,11 @@
   <!-- props -->
   <TodoSave :message="message"></TodoSave>
   <!-- props -->
-  <TodoList :message="message" :allMessageRemovedFlag="allMessageRemovedFlag"></TodoList>
+  <TodoList :message="message" :isRemovedFlag="isRemovedFlag"></TodoList>
   <!-- emit -->
   <TodoRemove @all-message-removed="setAllMessageReemoved"></TodoRemove>
+
+  <TodoFooter></TodoFooter>
 
 
 </template>
@@ -18,13 +20,14 @@ import TodoInput from "./components/TodoInput.vue";
 import TodoSave from "./components/TodoSave.vue";
 import TodoList from "./components/TodoList.vue";
 import TodoRemove from "./components/TodoRemove.vue";
+import TodoFooter from "./components/TodoFooter.vue";
 
 
 export default {
   data() {
     return {
       message: "",
-      allMessageRemovedFlag: false,
+      isRemovedFlag: false,
     }
   },
   components: {
@@ -33,14 +36,15 @@ export default {
     TodoSave:TodoSave,
     TodoList:TodoList,
     TodoRemove:TodoRemove,
+    TodoFooter:TodoFooter,
   },
   methods: {
     setMessage(value) {
       this.message = value.value;
-      this.allMessageRemovedFlag = false;
+      this.isRemovedFlag = false;
     },
     setAllMessageReemoved() {
-      this.allMessageRemovedFlag = true;
+      this.isRemovedFlag = true;
     }
   }
 }
