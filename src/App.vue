@@ -3,9 +3,9 @@
   <!-- emit -->
   <TodoInput @set-message="setMessage"></TodoInput>
   <!-- props -->
-  <TodoSave :message="message"></TodoSave>
+  <!-- <TodoSave :message="message"></TodoSave> -->
   <!-- props -->
-  <TodoList :message="message" :isRemovedFlag="isRemovedFlag"></TodoList>
+  <TodoList ref="todoListRef" :message="message" :isRemovedFlag="isRemovedFlag"></TodoList>
   <!-- emit -->
   <TodoRemove @all-message-removed="setAllMessageReemoved"></TodoRemove>
 
@@ -15,41 +15,38 @@
 
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
+
 import TodoHeader from "./components/TodoHeader.vue";
 import TodoInput from "./components/TodoInput.vue";
-import TodoSave from "./components/TodoSave.vue";
 import TodoList from "./components/TodoList.vue";
 import TodoRemove from "./components/TodoRemove.vue";
 import TodoFooter from "./components/TodoFooter.vue";
 import AnimeSamples from "./components/AnimeSample.vue";
 
-export default {
-  data() {
-    return {
-      message: "",
-      isRemovedFlag: false,
-    }
-  },
-  components: {
-    TodoHeader:TodoHeader,
-    TodoInput:TodoInput,
-    TodoSave:TodoSave,
-    TodoList:TodoList,
-    TodoRemove:TodoRemove,
-    TodoFooter:TodoFooter,
-    AnimeSamples: AnimeSamples,
-  },
-  methods: {
-    setMessage(value) {
-      this.message = value.value;
-      this.isRemovedFlag = false;
-    },
-    setAllMessageReemoved() {
-      this.isRemovedFlag = true;
-    }
+let message = ref("");
+let isRemovedFlag = ref(false);
+const todoListRef = ref();
+
+const setMessage = (value) => {
+  if (value == null) {
+    return;
   }
+  message.value = value.value;
+  isRemovedFlag.value = false;
+  showTodoList();
+};
+
+const setAllMessageReemoved = () => {
+  isRemovedFlag.value = true;
+  showTodoList();
 }
+
+const showTodoList = () => {
+    todoListRef.value.showTodoList();
+};
+
 </script>
 
 <style>

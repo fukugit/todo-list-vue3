@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { defineProps } from 'vue';
 import { computed } from 'vue';
+import { defineExpose } from 'vue';
 import { annotate } from 'rough-notation';
 
 let oldMessages = ref([]);
@@ -23,12 +24,11 @@ let displayNewMessage = computed(() => {
   return props.message;
 });
 
-const isDispay = computed(() => {
-  if (props.isRemovedFlag == true)  {
-    oldMessages = JSON.parse(localStorage.getItem('message'));
-    return false;
-  }
-  return true;
+const showTodoList = () => {
+  oldMessages = JSON.parse(localStorage.getItem('message'));
+};
+defineExpose({
+  showTodoList,
 });
 
 const afterEnter = (el) => {
@@ -40,7 +40,7 @@ const afterEnter = (el) => {
 
 
 <template>
-  <div>
+  <div class="li">
     <div>
       <ul class="red">
         <transition
@@ -50,13 +50,8 @@ const afterEnter = (el) => {
         </transition>
       </ul>
     </div>
-    <div v-if="isDispay === true" class="li">
+    <div>
       <ul v-for="oldMessage in oldMessages" :key="oldMessage">
-        <li >{{ oldMessage }}</li>
-      </ul>
-    </div>
-    <div v-else-if="isDispay === false" class="li">
-      <ul v-for="oldMessage in displayOldMessage" :key="oldMessage">
         <li >{{ oldMessage }}</li>
       </ul>
     </div>
