@@ -11,6 +11,7 @@
 
   <TodoFooter></TodoFooter>
 
+  <AnimeSamples></AnimeSamples>
 
 </template>
 
@@ -21,6 +22,7 @@ import TodoSave from "./components/TodoSave.vue";
 import TodoList from "./components/TodoList.vue";
 import TodoRemove from "./components/TodoRemove.vue";
 import TodoFooter from "./components/TodoFooter.vue";
+import AnimeSamples from "./components/AnimeSample.vue";
 
 export default {
   data() {
@@ -36,6 +38,7 @@ export default {
     TodoList:TodoList,
     TodoRemove:TodoRemove,
     TodoFooter:TodoFooter,
+    AnimeSamples: AnimeSamples,
   },
   methods: {
     setMessage(value) {

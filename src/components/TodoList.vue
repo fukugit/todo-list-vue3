@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { defineProps } from 'vue';
 import { computed } from 'vue';
+import { annotate } from 'rough-notation';
 
 let oldMessages = ref([]);
 
@@ -30,14 +31,25 @@ const isDispay = computed(() => {
   return true;
 });
 
+const afterEnter = (el) => {
+  const annotation1 = annotate(el, { type: 'highlight', color: '#FFFF00', animationDuration: 800 });
+  annotation1.show();
+};
+
 </script>
 
 
 <template>
   <div>
-    <ul class="red" v-if="displayNewMessage != ''">
-      <li id="current-input">Your latest input : {{ displayNewMessage }}</li>
-    </ul>
+    <div>
+      <ul class="red">
+        <transition
+          @after-enter="afterEnter"
+        >
+          <li v-if="displayNewMessage != ''">Your latest input : {{ displayNewMessage }}</li>
+        </transition>
+      </ul>
+    </div>
     <div v-if="isDispay === true" class="li">
       <ul v-for="oldMessage in oldMessages" :key="oldMessage">
         <li >{{ oldMessage }}</li>
@@ -48,8 +60,6 @@ const isDispay = computed(() => {
         <li >{{ oldMessage }}</li>
       </ul>
     </div>
-
-
   </div>
 </template>
 
@@ -61,5 +71,9 @@ const isDispay = computed(() => {
   }
   .red {
     color: red;
+  }
+  #currentInput {
+    display: block;
+    width: 500px;
   }
 </style>
