@@ -5,7 +5,10 @@ import { computed } from 'vue';
 import { defineExpose } from 'vue';
 import { annotate } from 'rough-notation';
 
-let oldMessages = ref([]);
+const obj = ref({
+  oldMessages: [],
+})
+
 
 const props = defineProps({
   message:{
@@ -20,12 +23,16 @@ const props = defineProps({
 });
 
 let displayNewMessage = computed(() => {
-  oldMessages = JSON.parse(localStorage.getItem('message'));
   return props.message;
 });
 
 const showTodoList = () => {
-  oldMessages = JSON.parse(localStorage.getItem('message'));
+  if (obj.value.oldMessages == null) {
+    obj.value.oldMessages = [];
+  }
+  let messages = JSON.parse(localStorage.getItem('message'));
+  obj.value.oldMessages.slice(0, obj.value.oldMessages.length);
+  obj.value.oldMessages = messages;
 };
 defineExpose({
   showTodoList,
@@ -51,9 +58,11 @@ const afterEnter = (el) => {
       </ul>
     </div>
     <div>
-      <ul v-for="oldMessage in oldMessages" :key="oldMessage">
-        <li >{{ oldMessage }}</li>
-      </ul>
+      <div v-for="(todoList, key) in obj" :key="key">
+        <ul v-for="(todo) in todoList" :key="todo">
+          <li >{{ todo }}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>

@@ -3,8 +3,6 @@
   <!-- emit -->
   <TodoInput @set-message="setMessage"></TodoInput>
   <!-- props -->
-  <!-- <TodoSave :message="message"></TodoSave> -->
-  <!-- props -->
   <TodoList ref="todoListRef" :message="message" :isRemovedFlag="isRemovedFlag"></TodoList>
   <!-- emit -->
   <TodoRemove @all-message-removed="setAllMessageReemoved"></TodoRemove>
