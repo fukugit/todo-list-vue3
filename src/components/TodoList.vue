@@ -7,8 +7,8 @@ import { annotate } from 'rough-notation';
 
 const obj = ref({
   oldMessages: [],
-})
-
+});
+obj.value.oldMessages = JSON.parse(localStorage.getItem('message'));
 
 const props = defineProps({
   message:{
