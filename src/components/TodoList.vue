@@ -5,11 +5,15 @@ import { computed } from 'vue';
 import { defineExpose } from 'vue';
 import { annotate } from 'rough-notation';
 
+<<<<<<< HEAD
 const obj = ref({
   oldMessages: [],
 })
 //});
 //obj.value.oldMessages = JSON.parse(localStorage.getItem('message'));
+=======
+let oldMessages = ref([]);
+>>>>>>> parent of beac20d (Modify TODO List as displaying todo at all time)
 
 const props = defineProps({
   message:{
@@ -24,16 +28,12 @@ const props = defineProps({
 });
 
 let displayNewMessage = computed(() => {
+  oldMessages = JSON.parse(localStorage.getItem('message'));
   return props.message;
 });
 
 const showTodoList = () => {
-  if (obj.value.oldMessages == null) {
-    obj.value.oldMessages = [];
-  }
-  let messages = JSON.parse(localStorage.getItem('message'));
-  obj.value.oldMessages.slice(0, obj.value.oldMessages.length);
-  obj.value.oldMessages = messages;
+  oldMessages = JSON.parse(localStorage.getItem('message'));
 };
 defineExpose({
   showTodoList,
@@ -59,11 +59,9 @@ const afterEnter = (el) => {
       </ul>
     </div>
     <div>
-      <div v-for="(todoList, key) in obj" :key="key">
-        <ul v-for="(todo) in todoList" :key="todo">
-          <li >{{ todo }}</li>
-        </ul>
-      </div>
+      <ul v-for="oldMessage in oldMessages" :key="oldMessage">
+        <li >{{ oldMessage }}</li>
+      </ul>
     </div>
   </div>
 </template>
