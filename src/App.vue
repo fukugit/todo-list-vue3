@@ -1,18 +1,24 @@
 <template>
-  <TodoHeader></TodoHeader>
-  <!-- emit -->
-  <TodoInput @set-message="setMessage"></TodoInput>
-  <!-- props -->
-  <!-- <TodoSave :message="message"></TodoSave> -->
-  <!-- props -->
-  <TodoList ref="todoListRef" :message="message" :isRemovedFlag="isRemovedFlag"></TodoList>
-  <!-- emit -->
-  <TodoRemove @all-message-removed="setAllMessageReemoved"></TodoRemove>
+  <div class="wrapper">
+    <header>
+      <TodoHeader></TodoHeader>
+    </header>
+    <div class="main">
+      <article>
+        <!-- emit -->
+        <TodoInput @set-message="setMessage"></TodoInput>
+        <!-- emit -->
+        <TodoRemove @all-message-removed="setAllMessageReemoved"></TodoRemove>
+      </article>
+      <aside>
+        <!-- props -->
+        <TodoList ref="todoListRef" :message="message" :isRemovedFlag="isRemovedFlag"></TodoList>
+      </aside>
+    </div>
+    <TodoFooter></TodoFooter>
 
-  <TodoFooter></TodoFooter>
-
-  <AnimeSamples></AnimeSamples>
-
+    <AnimeSamples></AnimeSamples>
+  </div><!-- /.wrapper -->
 </template>
 
 <script setup>
@@ -50,4 +56,15 @@ const showTodoList = () => {
 </script>
 
 <style>
+.main {
+  display: flex;
+  justify-content: space-between;
+  min-height: 600px;
+}
+article {
+  width: 40%;
+}
+aside {
+  width: 55%;
+}
 </style>

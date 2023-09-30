@@ -1,11 +1,11 @@
 <template>
-  <header>
-    <h1 id="main-header">This is Header</h1>
-  </header>
+  <div class="main-header">
+    <h1>This is Header</h1>
+  </div>
 </template>
 
 <style scoped>
-  header {
+  .main-header {
     border: red solid;
     padding: 10px;
     margin-bottom: 10px;
