@@ -61,6 +61,9 @@ const showTodoList = () => {
   justify-content: space-between;
   min-height: 600px;
 }
+header {
+  margin-bottom: 10px;
+}
 article {
   width: 40%;
 }
