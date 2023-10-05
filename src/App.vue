@@ -18,6 +18,7 @@
     <TodoFooter></TodoFooter>
 
     <AnimeSamples></AnimeSamples>
+    <CustomDirective></CustomDirective>
   </div><!-- /.wrapper -->
 </template>
 
@@ -30,6 +31,7 @@ import TodoList from "./components/TodoList.vue";
 import TodoRemove from "./components/TodoRemove.vue";
 import TodoFooter from "./components/TodoFooter.vue";
 import AnimeSamples from "./components/AnimeSample.vue";
+import CustomDirective from "./components/CustomDirective.vue";
 
 let message = ref("");
 let isRemovedFlag = ref(false);

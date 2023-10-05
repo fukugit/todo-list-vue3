@@ -3,6 +3,9 @@ import App from './App.vue'
 import './assets/style/common.css'
 
 const app = createApp(App);
+app.directive("border", (el) => {
+  el.style.border = "solid red 1px";
+});
 app.mount("#app");
 
 // // After 'app.mount' such as creating DOM, it is possible to use the below like operating real DOM.
