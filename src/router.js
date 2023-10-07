@@ -1,15 +1,14 @@
-import {createRouter, createWebHashHistory} from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
 import HomeView from './components/view/HomeView.vue';
-import CustomDirective from './components/CustomDirective.vue';
+import SampleCode from './components/view/SampleCode.vue';
 
 const routes = [
   {path: '/', component: HomeView},
-  {path: '/explain', component: CustomDirective},
+  {path: '/sample', component: SampleCode},
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  mode: 'history',
+  history: createWebHistory(),
   routes,
 });
 
