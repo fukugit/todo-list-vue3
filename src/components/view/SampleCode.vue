@@ -1,6 +1,11 @@
 <template>
   <div class="wrapper">
     <h1>Sample Codes</h1>
+      <router-link
+        to="/"
+        class="sub-link">
+        Go back to top
+      </router-link>
     <AnimeSamples />
     <CustomDirective />
   </div>
@@ -13,4 +18,10 @@ import CustomDirective from "../CustomDirective.vue";
 </script>
 
 <style>
+  .sub-link {
+    display: block;
+    text-decoration: none;
+    color: blueviolet;
+    margin-bottom: 10px;
+  }
 </style>

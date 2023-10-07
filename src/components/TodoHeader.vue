@@ -6,7 +6,11 @@
     <div class="sub">
       <a class="sub-link" href="https://github.com/fukugit/todo-list-vue3" target="_blank">Github</a>
       <a class="sub-link" href="https://github.com/users/fukugit/projects/1" target="_blank">Prject</a>
-      <a class="sub-link" href="/sample">Sample Codes</a>
+      <router-link
+        to="/sample"
+        class="sub-link">
+        Sample Codes
+      </router-link>
     </div><!-- /.sub -->
     
   </div>
