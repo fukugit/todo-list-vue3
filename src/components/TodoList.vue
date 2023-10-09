@@ -39,8 +39,19 @@ defineExpose({
 });
 
 const afterEnter = (el) => {
-  const annotation1 = annotate(el, { type: 'highlight', color: '#FFFF00', animationDuration: 800 });
+  const annotation1 = annotate(el, { type: 'circle', color: '#B22222', animationDuration: 800 });
   annotation1.show();
+};
+
+const deleteTodo = (id) => {
+  let messages = JSON.parse(localStorage.getItem('message'));
+  messages.forEach((message, index) =>{
+    if (message.id == id) {
+      messages.splice(index, 1);
+    }
+  });
+  localStorage.setItem("message", JSON.stringify(messages));
+  showTodoList();
 };
 
 </script>
@@ -59,8 +70,11 @@ const afterEnter = (el) => {
     </div>
     <div>
       <div v-for="(todoList, key) in obj" :key="key">
-        <ul v-for="(todo) in todoList" :key="todo">
-          <li >{{ todo }}</li>
+        <ul v-for="(todo) in todoList" :key="todo.id">
+          <li id="{{todo.id}}"><input type="checkbox">
+            {{todo.message }}
+            <button type="button" @click="deleteTodo(todo.id)">Delete</button>
+          </li>
         </ul>
       </div>
     </div>
@@ -68,6 +82,9 @@ const afterEnter = (el) => {
 </template>
 
 <style scoped>
+  ul {
+    list-style: none;
+  }
   .li {
     border: yellowgreen solid;
     padding: 10px;

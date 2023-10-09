@@ -15,7 +15,13 @@ const addTodo = () => {
   if (messages == null) {
     messages = [];
   }
-  messages.push(messageInput.value);
+  const id = new Date().getTime();
+  messages.push(
+    {
+      id: id,
+      message: messageInput.value
+    }
+  );
   localStorage.setItem("message", JSON.stringify(messages));
 
   emit('set-message', messageInput);
