@@ -15,6 +15,10 @@ const props = defineProps({
     type: String,
     requirerd: true,
   },
+  messageId:{
+    type: Number,
+    requirerd: true,
+  },
   isRemovedFlag: {
     type: Boolean,
     default: false,
@@ -64,7 +68,7 @@ const deleteTodo = (id) => {
         <transition
           @after-enter="afterEnter"
         >
-          <li v-if="displayNewMessage != ''">Your latest input : {{ displayNewMessage }}</li>
+          <li v-if="displayNewMessage != ''">Your latest input : {{ displayNewMessage }} ID:{{props.messageId}}</li>
         </transition>
       </ul>
     </div>

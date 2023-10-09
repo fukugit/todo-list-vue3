@@ -12,7 +12,7 @@
       </article>
       <aside>
         <!-- props -->
-        <TodoList ref="todoListRef" :message="message" :isRemovedFlag="isRemovedFlag"></TodoList>
+        <TodoList ref="todoListRef" :message="message" :messageId="id" :isRemovedFlag="isRemovedFlag"></TodoList>
       </aside>
     </div>
     <TodoFooter></TodoFooter>
@@ -29,14 +29,16 @@ import TodoRemove from "../TodoRemove.vue";
 import TodoFooter from "../TodoFooter.vue";
 
 let message = ref("");
+let id = ref(0);
 let isRemovedFlag = ref(false);
 const todoListRef = ref();
 
-const setMessage = (value) => {
-  if (value == null) {
+const setMessage = (messageInput, messageId) => {
+  if (messageInput == null) {
     return;
   }
-  message.value = value.value;
+  message.value = messageInput.value;
+  id.value = messageId.value;
   isRemovedFlag.value = false;
   showTodoList();
 };

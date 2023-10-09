@@ -3,6 +3,7 @@ import {ref} from 'vue';
 import { defineEmits } from 'vue';
 
 let messageInput = ref("hello");
+let messageId = ref(1);
 
 const emit = defineEmits(['set-message']);
 
@@ -24,7 +25,8 @@ const addTodo = () => {
   );
   localStorage.setItem("message", JSON.stringify(messages));
 
-  emit('set-message', messageInput);
+  messageId.value = id;
+  emit('set-message',messageInput, messageId);
 };
 
 </script>
