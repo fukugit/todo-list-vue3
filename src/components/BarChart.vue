@@ -6,6 +6,7 @@
   />
 </template>
 
+
 <script>
 // https://vue-chartjs.org/guide/#installation
 import { Bar } from 'vue-chartjs'
