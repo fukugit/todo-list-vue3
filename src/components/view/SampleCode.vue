@@ -8,12 +8,14 @@
       </router-link>
     <AnimeSamples />
     <CustomDirective />
+    <BarChart />
   </div>
 </template>
 
 <script setup>
 import AnimeSamples from "../AnimeSample.vue";
 import CustomDirective from "../CustomDirective.vue";
+import BarChart from "../BarChart.vue";
 
 </script>
 

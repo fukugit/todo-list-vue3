@@ -73,10 +73,13 @@ const deleteTodo = (id) => {
       </ul>
     </div>
     <div>
+      <button type="button" >Selete All</button>
+      <button type="button" >Delete</button>
       <div v-for="(todoList, key) in obj" :key="key">
         <ul v-for="(todo) in todoList" :key="todo.id">
           <li id="{{todo.id}}"><input type="checkbox">
             {{todo.message }}
+            <button type="button" >Done</button>
             <button type="button" @click="deleteTodo(todo.id)">Delete</button>
           </li>
         </ul>
