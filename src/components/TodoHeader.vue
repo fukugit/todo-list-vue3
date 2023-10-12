@@ -1,7 +1,11 @@
 <template>
   <div class="main-header">
     <div class="title">
-      <h1>This is Header</h1>
+      <router-link
+        to="/"
+        class="h1-link">
+        <h1 class="animate__animated animate__bounce">This is Header</h1>
+      </router-link>
     </div><!-- /.title -->
     <div class="sub">
       <a class="sub-link" href="https://github.com/fukugit/todo-list-vue3" target="_blank">Github</a>
@@ -34,6 +38,10 @@
     width: 400px;
     display: flex;
     justify-content: space-around;
+  }
+  .h1-link {
+    text-decoration: none;
+    color: black;
   }
   .sub-link {
     display: block;

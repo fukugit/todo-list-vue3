@@ -46,6 +46,9 @@ const afterEnter = (el) => {
   const annotation1 = annotate(el, { type: 'circle', color: '#B22222', animationDuration: 800 });
   annotation1.show();
 };
+const afterExit = () => {
+  alert("sssss");
+};
 
 const deleteTodo = (id) => {
   let messages = JSON.parse(localStorage.getItem('message'));
@@ -66,7 +69,11 @@ const deleteTodo = (id) => {
     <div>
       <ul class="red">
         <transition
+          type="animation"
           @after-enter="afterEnter"
+          @after-exit="afterExit"
+          enter-active-class="animate__animated animate__bounce"
+          appear
         >
           <li v-if="displayNewMessage != ''">Your latest input : {{ displayNewMessage }} ID:{{props.messageId}}</li>
         </transition>

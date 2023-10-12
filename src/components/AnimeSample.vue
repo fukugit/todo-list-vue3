@@ -3,6 +3,7 @@ import {ref} from 'vue';
 import { annotate } from 'rough-notation';
 
 const isShowHello = ref(false);
+const isShowHello2 = ref(false);
 const isShowHi = ref(false);
 
 const beforeEnter = () => {
@@ -39,6 +40,14 @@ const leaveCanceled = () => {
       </transition>
     </div><!-- /.hello -->
 
+    <div class="hello">
+      <button @click="isShowHello2 = !isShowHello2">Show Hello</button>
+      <transition
+        enter-active-class="animate__animated animate__bounce"
+        >
+          <p v-if="isShowHello2">Animate.css</p>
+      </transition>
+    </div><!-- /.hello -->
 
     <div class="hi">
       <button @click="isShowHi = !isShowHi">Show Hi</button>
