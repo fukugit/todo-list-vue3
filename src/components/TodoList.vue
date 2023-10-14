@@ -36,6 +36,10 @@ const showTodoList = () => {
   }
   let messages = JSON.parse(localStorage.getItem('message'));
   obj.value.oldMessages.slice(0, obj.value.oldMessages.length);
+  if (messages != null) {
+    // sort by id with descending order
+    messages.sort((a,b) =>  b.id - a.id);
+  }
   obj.value.oldMessages = messages;
 };
 defineExpose({
@@ -84,7 +88,22 @@ const deleteTodo = (id) => {
       <button type="button" >Delete</button>
       <div v-for="(todoList, key) in obj" :key="key">
         <ul v-for="(todo) in todoList" :key="todo.id">
-          <li id="{{todo.id}}"><input type="checkbox">
+          <!-- TODO transition -->
+          <transition
+            type="animation"
+            enter-active-class="animate__animated animate__bounce"
+            appear
+          >
+            <li v-if="todo.id == messageId" id="{{todo.id}}">
+              <input type="checkbox">
+              {{todo.message }}
+              <button type="button" >Done</button>
+              <button type="button" @click="deleteTodo(todo.id)">Delete</button>
+            </li>
+          </transition>
+
+          <li v-if="todo.id != messageId" id="{{todo.id}}">
+            <input type="checkbox">
             {{todo.message }}
             <button type="button" >Done</button>
             <button type="button" @click="deleteTodo(todo.id)">Delete</button>
