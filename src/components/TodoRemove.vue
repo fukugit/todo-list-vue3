@@ -13,8 +13,8 @@ const deleteTodoList = () => {
 </script>
 
 <template>
-  <div>
-    <button @click="deleteTodoList">Delete All</button>
+  <div class="frame">
+    <div class="button" @click="deleteTodoList">Delete All</div>
     <transition name="fade">
       <p v-if="isDeleted">All TODOs were removed!</p>
     </transition>
@@ -23,7 +23,7 @@ const deleteTodoList = () => {
 
 
 <style scoped>
-  div {
+  .frame {
     border: lightcoral solid;
     padding: 10px;
     margin-bottom: 10px;

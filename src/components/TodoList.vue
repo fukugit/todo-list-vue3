@@ -1,16 +1,14 @@
 <script setup>
 import { ref } from 'vue';
 import { defineProps } from 'vue';
-import { computed } from 'vue';
 import { defineExpose } from 'vue';
-import { annotate } from 'rough-notation';
 
 const obj = ref({
   oldMessages: [],
 })
 obj.value.oldMessages = JSON.parse(localStorage.getItem('message'));
 
-const props = defineProps({
+defineProps({
   message:{
     type: String,
     requirerd: true,
@@ -24,10 +22,6 @@ const props = defineProps({
     default: false,
     requirerd: false,
   }
-});
-
-let displayNewMessage = computed(() => {
-  return props.message;
 });
 
 const showTodoList = () => {
@@ -46,14 +40,6 @@ defineExpose({
   showTodoList,
 });
 
-const afterEnter = (el) => {
-  const annotation1 = annotate(el, { type: 'circle', color: '#B22222', animationDuration: 800 });
-  annotation1.show();
-};
-const afterExit = () => {
-  alert("sssss");
-};
-
 const deleteTodo = (id) => {
   let messages = JSON.parse(localStorage.getItem('message'));
   messages.forEach((message, index) =>{
@@ -71,24 +57,10 @@ const deleteTodo = (id) => {
 <template>
   <div class="li">
     <div>
-      <ul class="red">
-        <transition
-          type="animation"
-          @after-enter="afterEnter"
-          @after-exit="afterExit"
-          enter-active-class="animate__animated animate__bounce"
-          appear
-        >
-          <li v-if="displayNewMessage != ''">Your latest input : {{ displayNewMessage }} ID:{{props.messageId}}</li>
-        </transition>
-      </ul>
-    </div>
-    <div>
-      <button type="button" >Selete All</button>
-      <button type="button" >Delete</button>
+      <div class="button">Selete All</div>
+      <div class="button">Delete</div>
       <div v-for="(todoList, key) in obj" :key="key">
         <ul v-for="(todo) in todoList" :key="todo.id">
-          <!-- TODO transition -->
           <transition
             type="animation"
             enter-active-class="animate__animated animate__bounce"
@@ -97,16 +69,16 @@ const deleteTodo = (id) => {
             <li v-if="todo.id == messageId" id="{{todo.id}}">
               <input type="checkbox">
               {{todo.message }}
-              <button type="button" >Done</button>
-              <button type="button" @click="deleteTodo(todo.id)">Delete</button>
+              <div class="button">Done</div>
+              <div class="button" @click="deleteTodo(todo.id)">Delete</div>
             </li>
           </transition>
 
           <li v-if="todo.id != messageId" id="{{todo.id}}">
             <input type="checkbox">
             {{todo.message }}
-            <button type="button" >Done</button>
-            <button type="button" @click="deleteTodo(todo.id)">Delete</button>
+            <div class="button">Done</div>
+            <div class="button" @click="deleteTodo(todo.id)">Delete</div>
           </li>
         </ul>
       </div>
