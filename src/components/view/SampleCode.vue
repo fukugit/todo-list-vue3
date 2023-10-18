@@ -9,6 +9,7 @@
     <AnimeSamples />
     <CustomDirective />
     <BarChart />
+    <BootStrap />
   </div>
 </template>
 
@@ -16,6 +17,7 @@
 import AnimeSamples from "../AnimeSample.vue";
 import CustomDirective from "../CustomDirective.vue";
 import BarChart from "../BarChart.vue";
+import BootStrap from "../BootStrap.vue";
 
 </script>
 
