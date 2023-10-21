@@ -4,8 +4,9 @@ import router from './router.js'
 import './assets/style/common.css'
 import 'animate.css';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import "./assets/scss/bootstrap-custom.scss"
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 const app = createApp(App);
 app.directive("border", (el) => {
