@@ -1,40 +1,38 @@
 <template>
-  <div class="main-header">
-    <div class="title">
-      <router-link
-        to="/"
-        class="h1-link">
-        <h1 class="animate__animated animate__bounce">This is Header</h1>
-      </router-link>
-    </div><!-- /.title -->
-    <div class="sub">
-      <a class="sub-link" href="https://github.com/fukugit/todo-list-vue3" target="_blank">Github</a>
-      <a class="sub-link" href="https://github.com/users/fukugit/projects/1" target="_blank">Prject</a>
-      <router-link
-        to="/sample"
-        class="sub-link">
-        Sample Codes
-      </router-link>
-    </div><!-- /.sub -->
-    
+<div class="container text-left">
+  <div class="row">
+    <div class="col-6 pt-2">
+      <div class="title">
+        <router-link
+          to="/"
+          class="h1-link">
+          <h1 class="animate__animated animate__bounce">This is Header</h1>
+        </router-link>
+      </div><!-- /.title -->
+    </div>
+    <div class="col-6">
+      <div class="sub">
+        <a class="sub-link" href="https://github.com/fukugit/todo-list-vue3" target="_blank">Github</a>
+        <a class="sub-link" href="https://github.com/users/fukugit/projects/1" target="_blank">Prject</a>
+        <router-link
+          to="/sample"
+          class="sub-link">
+          Sample Codes
+        </router-link>
+      </div><!-- /.sub -->
+    </div>
   </div>
+</div>
 </template>
 
 <style scoped>
-  .main-header {
-    border: red solid;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    height: 80px;
-  }
+
   .title {
     /* background-color: red; */
     width: 400px;
   }
   .sub {
     margin-top: 50px;
-    /* background-color: blue; */
     width: 400px;
     display: flex;
     justify-content: space-around;

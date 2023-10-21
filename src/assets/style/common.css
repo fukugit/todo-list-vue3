@@ -1,11 +1,17 @@
 html {
   overflow-y: scroll;
 }
+[class^="col-"] {
+  background-color: rgb(183, 186, 186);
+}
+
+
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 10px;
   padding: 0 4%;
-  background-color: rgb(216, 245, 235);
+  background-color: rgb(57, 144, 113);
 }
 .button {
   background-color: #09770d; /* Green */

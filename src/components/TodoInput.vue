@@ -35,9 +35,7 @@ const addTodo = () => {
 <template>
   <div class="frame">
     <input type="text" v-model.lazy="messageInput"><p>Your input : {{ messageInput }}</p>
-    <div class="button" @click="addTodo">
-      Add
-    </div>
+    <button type="button" class="btn btn-primary" @click="addTodo">Add</button>
   </div>
 </template>
 
