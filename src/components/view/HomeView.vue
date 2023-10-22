@@ -1,21 +1,29 @@
 <template>
   <div class="wrapper">
-    <header>
-      <TodoHeader></TodoHeader>
-    </header>
-    <div class="main">
-      <article>
-        <!-- emit -->
-        <TodoInput @set-message="setMessage"></TodoInput>
-        <!-- emit -->
-        <TodoRemove @all-message-removed="setAllMessageReemoved"></TodoRemove>
-      </article>
-      <aside>
-        <!-- props -->
-        <TodoList ref="todoListRef" :message="message" :messageId="id" :isRemovedFlag="isRemovedFlag"></TodoList>
-      </aside>
+    <div class="container text-left">
+      <div class="row mb-1">
+        <div class="col-12">
+          <TodoHeader></TodoHeader>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-5">
+          <!-- emit -->
+          <TodoInput @set-message="setMessage"></TodoInput>
+          <!-- emit -->
+          <TodoRemove @all-message-removed="setAllMessageReemoved"></TodoRemove>
+        </div>
+        <div class="col-7">
+          <!-- props -->
+          <TodoList ref="todoListRef" :message="message" :messageId="id" :isRemovedFlag="isRemovedFlag"></TodoList>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-12">
+          <TodoFooter></TodoFooter>
+        </div>
+      </div>
     </div>
-    <TodoFooter></TodoFooter>
   </div><!-- /.wrapper -->
 </template>
 
@@ -55,18 +63,4 @@ const showTodoList = () => {
 </script>
 
 <style>
-.main {
-  display: flex;
-  justify-content: space-between;
-  min-height: 600px;
-}
-header {
-  margin-bottom: 10px;
-}
-article {
-  width: 40%;
-}
-aside {
-  width: 55%;
-}
 </style>

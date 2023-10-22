@@ -57,8 +57,8 @@ const deleteTodo = (id) => {
 <template>
   <div class="li">
     <div>
-      <div class="button">Selete All</div>
-      <div class="button">Delete</div>
+      <button type="button" class="btn btn-primary mr-1 mb-1">Selete All</button>
+      <button type="button" class="btn btn-primary mr-1 mb-1">Delete</button>
       <div v-for="(todoList, key) in obj" :key="key">
         <ul v-for="(todo) in todoList" :key="todo.id">
           <transition
@@ -69,16 +69,16 @@ const deleteTodo = (id) => {
             <li v-if="todo.id == messageId" id="{{todo.id}}">
               <input type="checkbox">
               {{todo.message }}
-              <div class="button">Done</div>
-              <div class="button" @click="deleteTodo(todo.id)">Delete</div>
+              <button type="button" class="btn btn-primary mr-1">Done</button>
+              <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
             </li>
           </transition>
 
           <li v-if="todo.id != messageId" id="{{todo.id}}">
             <input type="checkbox">
             {{todo.message }}
-            <div class="button">Done</div>
-            <div class="button" @click="deleteTodo(todo.id)">Delete</div>
+            <button type="button" class="btn btn-primary mr-1">Done</button>
+            <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
           </li>
         </ul>
       </div>

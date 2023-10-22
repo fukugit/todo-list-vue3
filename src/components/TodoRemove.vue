@@ -14,7 +14,7 @@ const deleteTodoList = () => {
 
 <template>
   <div class="frame">
-    <div class="button" @click="deleteTodoList">Delete All</div>
+    <button type="button" class="btn btn-primary" @click="deleteTodoList">Delete All</button>
     <transition name="fade">
       <p v-if="isDeleted">All TODOs were removed!</p>
     </transition>
