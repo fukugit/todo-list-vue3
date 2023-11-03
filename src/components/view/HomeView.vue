@@ -10,8 +10,6 @@
         <div class="col-5">
           <!-- emit -->
           <TodoInput @set-message="setMessage"></TodoInput>
-          <!-- emit -->
-          <TodoRemove @all-message-removed="setAllMessageReemoved"></TodoRemove>
         </div>
         <div class="col-7">
           <!-- props -->
@@ -33,7 +31,6 @@ import { ref } from 'vue';
 import TodoHeader from "../TodoHeader.vue";
 import TodoInput from "../TodoInput.vue";
 import TodoList from "../TodoList.vue";
-import TodoRemove from "../TodoRemove.vue";
 import TodoFooter from "../TodoFooter.vue";
 
 let message = ref("");
@@ -50,11 +47,6 @@ const setMessage = (messageInput, messageId) => {
   isRemovedFlag.value = false;
   showTodoList();
 };
-
-const setAllMessageReemoved = () => {
-  isRemovedFlag.value = true;
-  showTodoList();
-}
 
 const showTodoList = () => {
     todoListRef.value.showTodoList();

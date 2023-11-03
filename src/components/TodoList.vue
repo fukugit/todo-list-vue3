@@ -2,11 +2,15 @@
 import { ref } from 'vue';
 import { defineProps } from 'vue';
 import { defineExpose } from 'vue';
+import TodoRemove from "./TodoRemove.vue";
 
 const obj = ref({
   oldMessages: [],
 })
 obj.value.oldMessages = JSON.parse(localStorage.getItem('message'));
+
+const deletes = ref([])
+const isAllDeleted = ref(false);
 
 defineProps({
   message:{
@@ -25,9 +29,12 @@ defineProps({
 });
 
 const showTodoList = () => {
+  // Initialized
+  isAllDeleted.value = false
   if (obj.value.oldMessages == null) {
     obj.value.oldMessages = [];
   }
+
   let messages = JSON.parse(localStorage.getItem('message'));
   obj.value.oldMessages.slice(0, obj.value.oldMessages.length);
   if (messages != null) {
@@ -51,14 +58,38 @@ const deleteTodo = (id) => {
   showTodoList();
 };
 
+const deleteTodos = () => {
+  deletes.value.forEach((delId) => {
+    let messages = JSON.parse(localStorage.getItem('message'));
+    messages.forEach((message, index) =>{
+      if (message.id == delId) {
+        messages.splice(index, 1);
+      }
+    });
+    localStorage.setItem("message", JSON.stringify(messages));
+  })
+  showTodoList();
+};
+
+const setAllMessageReemoved = () => {
+  isAllDeleted.value = true;
+  let messages = JSON.parse(localStorage.getItem('message'));
+  obj.value.oldMessages = messages;
+}
 </script>
 
 
 <template>
   <div class="li">
     <div>
-      <button type="button" class="btn btn-primary mr-1 mb-1">Selete All</button>
-      <button type="button" class="btn btn-primary mr-1 mb-1">Delete</button>
+      <!-- emit -->
+      <TodoRemove class="" @all-message-removed="setAllMessageReemoved"></TodoRemove>
+      <button type="button" class="btn btn-primary mr-1 mb-1" @click="deleteTodos()">Delete</button>
+      <transition name="fade">
+        <p v-if="isAllDeleted">
+          All TODOs were removed!
+        </p>
+      </transition>
       <div v-for="(todoList, key) in obj" :key="key">
         <ul v-for="(todo) in todoList" :key="todo.id">
           <transition
@@ -66,16 +97,16 @@ const deleteTodo = (id) => {
             enter-active-class="animate__animated animate__bounce"
             appear
           >
-            <li v-if="todo.id == messageId" id="{{todo.id}}">
-              <input type="checkbox">
+            <li v-if="todo.id == messageId" :id="todo.id">
+              <input type="checkbox" :value="todo.id" v-model="deletes">
               {{todo.message }}
               <button type="button" class="btn btn-primary mr-1">Done</button>
               <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
             </li>
           </transition>
 
-          <li v-if="todo.id != messageId" id="{{todo.id}}">
-            <input type="checkbox">
+          <li v-if="todo.id != messageId" :id="todo.id">
+            <input type="checkbox" :value="todo.id" v-model="deletes">
             {{todo.message }}
             <button type="button" class="btn btn-primary mr-1">Done</button>
             <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
@@ -95,11 +126,12 @@ const deleteTodo = (id) => {
     padding: 10px;
     margin-bottom: 10px;
   }
-  .red {
-    color: red;
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 1s;
   }
-  #currentInput {
-    display: block;
-    width: 500px;
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
   }
 </style>
