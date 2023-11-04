@@ -12,12 +12,16 @@
     </div>
     <div class="col-6">
       <div class="sub">
-        <a class="sub-link" href="https://github.com/fukugit/todo-list-vue3" target="_blank">Github</a>
-        <a class="sub-link" href="https://github.com/users/fukugit/projects/1" target="_blank">Prject</a>
+        <a class="sub-link" href="https://github.com/fukugit/todo-list-vue3" target="_blank">
+          <font-awesome-icon icon="fa-brands fa-github" />
+        </a>
+        <a class="sub-link" href="https://github.com/users/fukugit/projects/1" target="_blank">
+          <font-awesome-icon icon="fa-solid fa-clipboard-check" />
+        </a>
         <router-link
           to="/sample"
           class="sub-link">
-          Sample Codes
+          <font-awesome-icon icon="fa-solid fa-code" />
         </router-link>
       </div><!-- /.sub -->
     </div>

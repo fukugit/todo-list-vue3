@@ -1,9 +1,9 @@
 html {
   overflow-y: scroll;
 }
-[class^="col-"] {
+/* [class^="col-"] {
   background-color: rgb(183, 186, 186);
-}
+} */
 
 
 .wrapper {
@@ -11,5 +11,5 @@ html {
   margin: 0 auto;
   margin-top: 10px;
   padding: 0 4%;
-  background-color: rgb(57, 144, 113);
+  /* background-color: rgb(57, 144, 113); */
 }

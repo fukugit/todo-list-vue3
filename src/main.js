@@ -8,10 +8,28 @@ import "./assets/scss/bootstrap-custom.scss"
 // import 'bootstrap/dist/css/bootstrap.css'
 // import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
+/* import font awesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+/* import specific icons */
+import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCode } from '@fortawesome/free-solid-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
+
 const app = createApp(App);
 app.directive("border", (el) => {
   el.style.border = "solid red 1px";
 });
 
-app.use(router).use(BootstrapVue).use(IconsPlugin).mount("#app");
+/* add fortawesome icons to the library */
+library.add(faGithub, faClipboardCheck, faCode)
+
+
+app
+  .component('font-awesome-icon', FontAwesomeIcon)
+  .use(router)
+  .use(BootstrapVue)
+  .use(IconsPlugin)
+  .mount("#app");
 
