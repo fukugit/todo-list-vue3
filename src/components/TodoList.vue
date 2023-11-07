@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { defineProps } from 'vue';
 import { defineExpose } from 'vue';
 import TodoRemove from "./TodoRemove.vue";
+import ToastFeature from "./ToastFeature.vue"
 
 const obj = ref({
   oldMessages: [],
@@ -11,6 +12,7 @@ obj.value.oldMessages = JSON.parse(localStorage.getItem('message'));
 
 const deletes = ref([])
 const isAllDeleted = ref(false);
+const toast = ref(null)
 
 defineProps({
   message:{
@@ -56,6 +58,7 @@ const deleteTodo = (id) => {
   });
   localStorage.setItem("message", JSON.stringify(messages));
   showTodoList();
+  toast.value.makeToast()
 };
 
 const deleteTodos = () => {
@@ -81,6 +84,9 @@ const setAllMessageReemoved = () => {
 
 <template>
   <div class="li">
+    <ToastFeature
+      ref="toast"
+    />
     <div>
       <!-- emit -->
       <TodoRemove class="" @all-message-removed="setAllMessageReemoved"></TodoRemove>
