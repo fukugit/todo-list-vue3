@@ -13,6 +13,7 @@ obj.value.oldMessages = JSON.parse(localStorage.getItem('message'));
 const deletes = ref([])
 const isAllDeleted = ref(false);
 const toast = ref(null)
+const checkedFlg = ref(false)
 
 defineProps({
   message:{
@@ -61,6 +62,19 @@ const deleteTodo = (id) => {
   toast.value.makeToast()
 };
 
+const checkAllTodos = () => {
+  checkedFlg.value = !checkedFlg.value
+  if (checkedFlg.value) {
+    const messages = JSON.parse(localStorage.getItem('message'));
+    messages.forEach((message) =>{
+      deletes.value.push(message.id)
+    });
+  } else {
+    deletes.value = []
+  }
+};
+
+
 const deleteTodos = () => {
   deletes.value.forEach((delId) => {
     let messages = JSON.parse(localStorage.getItem('message'));
@@ -90,6 +104,7 @@ const setAllMessageReemoved = () => {
     <div>
       <!-- emit -->
       <TodoRemove class="" @all-message-removed="setAllMessageReemoved"></TodoRemove>
+      <button type="button" class="btn btn-primary mr-1 mb-1" @click="checkAllTodos()">Select All</button>
       <button type="button" class="btn btn-primary mr-1 mb-1" @click="deleteTodos()">Delete</button>
       <transition name="fade">
         <p v-if="isAllDeleted">
@@ -139,5 +154,8 @@ const setAllMessageReemoved = () => {
   .fade-enter-from,
   .fade-leave-to {
     opacity: 0;
+  }
+  input[type=checkbox] {
+    transform: scale(1.5);
   }
 </style>
