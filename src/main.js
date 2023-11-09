@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* import specific icons */
 import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
 import { faCode } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 const app = createApp(App);
@@ -23,7 +24,7 @@ app.directive("border", (el) => {
 });
 
 /* add fortawesome icons to the library */
-library.add(faGithub, faClipboardCheck, faCode)
+library.add(faGithub, faClipboardCheck, faCode, faPlus)
 
 
 app
