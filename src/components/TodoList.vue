@@ -5,10 +5,8 @@ import { defineExpose } from 'vue';
 import TodoRemove from "./TodoRemove.vue";
 import ToastFeature from "./ToastFeature.vue"
 
-const obj = ref({
-  oldMessages: [],
-})
-obj.value.oldMessages = JSON.parse(localStorage.getItem('message'));
+let messages = ref([])
+messages.value = JSON.parse(localStorage.getItem('message'));
 
 const deletes = ref([])
 const isAllDeleted = ref(false);
@@ -34,30 +32,30 @@ defineProps({
 const showTodoList = () => {
   // Initialized
   isAllDeleted.value = false
-  if (obj.value.oldMessages == null) {
-    obj.value.oldMessages = [];
+  if (messages.value == null) {
+    messages.value = [];
   }
 
-  let messages = JSON.parse(localStorage.getItem('message'));
-  obj.value.oldMessages.slice(0, obj.value.oldMessages.length);
-  if (messages != null) {
+  let currents = JSON.parse(localStorage.getItem('message'));
+  messages.value.slice(0, currents.length);
+  if (currents != null) {
     // sort by id with descending order
-    messages.sort((a,b) =>  b.id - a.id);
+    currents.sort((a,b) =>  b.id - a.id);
   }
-  obj.value.oldMessages = messages;
+  messages.value = currents;
 };
 defineExpose({
   showTodoList,
 });
 
 const deleteTodo = (id) => {
-  let messages = JSON.parse(localStorage.getItem('message'));
-  messages.forEach((message, index) =>{
+  let currents = JSON.parse(localStorage.getItem('message'));
+  currents.forEach((message, index) =>{
     if (message.id == id) {
-      messages.splice(index, 1);
+      currents.splice(index, 1);
     }
   });
-  localStorage.setItem("message", JSON.stringify(messages));
+  localStorage.setItem("message", JSON.stringify(currents));
   showTodoList();
   toast.value.makeToast()
 };
@@ -65,8 +63,8 @@ const deleteTodo = (id) => {
 const checkAllTodos = () => {
   checkedFlg.value = !checkedFlg.value
   if (checkedFlg.value) {
-    const messages = JSON.parse(localStorage.getItem('message'));
-    messages.forEach((message) =>{
+    const currents = JSON.parse(localStorage.getItem('message'));
+    currents.forEach((message) =>{
       deletes.value.push(message.id)
     });
   } else {
@@ -77,21 +75,21 @@ const checkAllTodos = () => {
 
 const deleteTodos = () => {
   deletes.value.forEach((delId) => {
-    let messages = JSON.parse(localStorage.getItem('message'));
-    messages.forEach((message, index) =>{
+    let currents = JSON.parse(localStorage.getItem('message'));
+    currents.forEach((message, index) =>{
       if (message.id == delId) {
-        messages.splice(index, 1);
+        currents.splice(index, 1);
       }
     });
-    localStorage.setItem("message", JSON.stringify(messages));
+    localStorage.setItem("message", JSON.stringify(currents));
   })
   showTodoList();
 };
 
 const setAllMessageReemoved = () => {
   isAllDeleted.value = true;
-  let messages = JSON.parse(localStorage.getItem('message'));
-  obj.value.oldMessages = messages;
+  let currents = JSON.parse(localStorage.getItem('message'));
+  messages.value = currents;
 }
 </script>
 
@@ -111,29 +109,27 @@ const setAllMessageReemoved = () => {
           All TODOs were removed!
         </p>
       </transition>
-      <div v-for="(todoList, key) in obj" :key="key">
-        <ul v-for="(todo) in todoList" :key="todo.id">
-          <transition
-            type="animation"
-            enter-active-class="animate__animated animate__bounce"
-            appear
-          >
-            <li v-if="todo.id == messageId" :id="todo.id">
-              <input type="checkbox" :value="todo.id" v-model="deletes">
-              {{todo.message }}
-              <button type="button" class="btn btn-primary mr-1">Done</button>
-              <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
-            </li>
-          </transition>
-
-          <li v-if="todo.id != messageId" :id="todo.id">
+      <ul v-for="(todo) in messages" :key="todo.id">
+        <transition
+          type="animation"
+          enter-active-class="animate__animated animate__bounce"
+          appear
+        >
+          <li v-if="todo.id == messageId" :id="todo.id">
             <input type="checkbox" :value="todo.id" v-model="deletes">
             {{todo.message }}
             <button type="button" class="btn btn-primary mr-1">Done</button>
             <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
           </li>
-        </ul>
-      </div>
+        </transition>
+
+        <li v-if="todo.id != messageId" :id="todo.id">
+          <input type="checkbox" :value="todo.id" v-model="deletes">
+          {{todo.message }}
+          <button type="button" class="btn btn-primary mr-1">Done</button>
+          <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
+        </li>
+      </ul>
     </div>
   </div>
 </template>

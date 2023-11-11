@@ -5,8 +5,6 @@ import './assets/style/common.css'
 import 'animate.css';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import "./assets/scss/bootstrap-custom.scss"
-// import 'bootstrap/dist/css/bootstrap.css'
-// import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -17,6 +15,11 @@ import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
 import { faCode } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
+
+// Google Fonts
+import "@fontsource/open-sans";
+import '@fontsource-variable/tourney'; // https://fontsource.org/fonts/tourney/install
+
 
 const app = createApp(App);
 app.directive("border", (el) => {
