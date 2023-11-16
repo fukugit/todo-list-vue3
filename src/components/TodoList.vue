@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 import { defineProps } from 'vue';
 import { defineExpose } from 'vue';
-import TodoRemove from "./TodoRemove.vue";
 import ToastFeature from "./ToastFeature.vue"
 
 let messages = ref([])
@@ -74,6 +73,10 @@ const checkAllTodos = () => {
 
 
 const deleteTodos = () => {
+  let all_message = JSON.parse(localStorage.getItem('message'));
+  if (deletes.value.length == all_message.length) {
+    isAllDeleted.value = true;
+  }
   deletes.value.forEach((delId) => {
     let currents = JSON.parse(localStorage.getItem('message'));
     currents.forEach((message, index) =>{
@@ -83,14 +86,13 @@ const deleteTodos = () => {
     });
     localStorage.setItem("message", JSON.stringify(currents));
   })
-  showTodoList();
+  if (!isAllDeleted.value) {
+    showTodoList();
+  } else {
+    const currents = JSON.parse(localStorage.getItem('message'));
+    messages.value = currents;
+  }
 };
-
-const setAllMessageReemoved = () => {
-  isAllDeleted.value = true;
-  let currents = JSON.parse(localStorage.getItem('message'));
-  messages.value = currents;
-}
 </script>
 
 
@@ -100,8 +102,6 @@ const setAllMessageReemoved = () => {
       ref="toast"
     />
     <div>
-      <!-- emit -->
-      <TodoRemove class="" @all-message-removed="setAllMessageReemoved"></TodoRemove>
       <button type="button" class="btn btn-primary mr-1 mb-1" @click="checkAllTodos()">Select All</button>
       <button type="button" class="btn btn-primary mr-1 mb-1" @click="deleteTodos()">Delete</button>
       <transition name="fade">

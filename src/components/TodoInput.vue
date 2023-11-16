@@ -34,7 +34,7 @@ const addTodo = () => {
 
 <template>
   <div class="frame">
-    <input type="text" v-model.lazy="messageInput"><p>Your input : {{ messageInput }}</p>
+    <input type="text" v-model.lazy="messageInput" class="mr-2">
     <button type="button" class="btn btn-primary btn-circle btn-sm" @click="addTodo">
       <font-awesome-icon icon="fa-solid fa-plus" beat-fade />
     </button>
@@ -43,7 +43,7 @@ const addTodo = () => {
 
 <style scoped>
   .frame {
-    border: blue solid;
+    /* border: blue solid; */
     padding: 10px;
     margin-bottom: 10px;
   }

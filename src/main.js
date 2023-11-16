@@ -18,7 +18,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 // Google Fonts
 import "@fontsource/open-sans";
-import '@fontsource-variable/tourney'; // https://fontsource.org/fonts/tourney/install
+import '@fontsource-variable/unbounded' // https://fontsource.org/fonts/unbounded/install
 
 
 const app = createApp(App);

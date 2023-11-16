@@ -7,11 +7,13 @@
         </div>
       </div>
       <div class="row mb-1">
-        <div class="col-5">
+        <div class="col-12">
           <!-- emit -->
           <TodoInput @set-message="setMessage"></TodoInput>
         </div>
-        <div class="col-7">
+      </div>
+      <div class="row mb-1">
+        <div class="col-12">
           <!-- props -->
           <TodoList ref="todoListRef" :message="message" :messageId="id" :isRemovedFlag="isRemovedFlag"></TodoList>
         </div>
