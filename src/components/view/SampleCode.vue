@@ -28,6 +28,11 @@
       </div>
       <div class="row mb-1">
         <div class="col-12">
+          <CheatSheet></CheatSheet>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-12">
           <TodoFooter></TodoFooter>
         </div>
       </div>
@@ -42,6 +47,7 @@ import AnimeSamples from "../AnimeSample.vue";
 import CustomDirective from "../CustomDirective.vue";
 import BarChart from "../BarChart.vue";
 import BootStrap from "../BootStrap.vue";
+import CheatSheet from "../CheatSheet.vue";
 
 </script>
 
