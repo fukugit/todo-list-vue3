@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router.js'
 import './assets/style/common.css'
 import 'animate.css';
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import {BootstrapVueNext} from 'bootstrap-vue-next'
 import "./assets/scss/bootstrap-custom.scss"
 
 /* import the fontawesome core */
@@ -33,7 +33,6 @@ library.add(faGithub, faClipboardCheck, faCode, faPlus)
 app
   .component('font-awesome-icon', FontAwesomeIcon)
   .use(router)
-  .use(BootstrapVue)
-  .use(IconsPlugin)
+  .use(BootstrapVueNext)
   .mount("#app");
 

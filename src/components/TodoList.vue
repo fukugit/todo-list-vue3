@@ -102,8 +102,8 @@ const deleteTodos = () => {
       ref="toast"
     />
     <div>
-      <button type="button" class="btn btn-primary mr-1 mb-1" @click="checkAllTodos()">Select All</button>
-      <button type="button" class="btn btn-primary mr-1 mb-1" @click="deleteTodos()">Delete</button>
+      <button type="button" class="btn btn-primary me-1 mb-1" @click="checkAllTodos()">Select All</button>
+      <button type="button" class="btn btn-primary me-1 mb-1" @click="deleteTodos()">Delete</button>
       <transition name="fade">
         <p v-if="isAllDeleted">
           All TODOs were removed!
@@ -118,7 +118,7 @@ const deleteTodos = () => {
           <li v-if="todo.id == messageId" :id="todo.id">
             <input type="checkbox" :value="todo.id" v-model="deletes">
             {{todo.message }}
-            <button type="button" class="btn btn-primary mr-1">Done</button>
+            <button type="button" class="btn btn-primary me-1">Done</button>
             <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
           </li>
         </transition>
@@ -126,7 +126,7 @@ const deleteTodos = () => {
         <li v-if="todo.id != messageId" :id="todo.id">
           <input type="checkbox" :value="todo.id" v-model="deletes">
           {{todo.message }}
-          <button type="button" class="btn btn-primary mr-1">Done</button>
+          <button type="button" class="btn btn-primary me-1">Done</button>
           <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
         </li>
       </ul>
