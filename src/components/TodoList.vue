@@ -2,14 +2,14 @@
 import { ref } from 'vue';
 import { defineProps } from 'vue';
 import { defineExpose } from 'vue';
-import ToastFeature from "./ToastFeature.vue"
+import { useToast } from 'bootstrap-vue-next';
+const {show} = useToast()
 
 let messages = ref([])
 messages.value = JSON.parse(localStorage.getItem('message'));
 
 const deletes = ref([])
 const isAllDeleted = ref(false);
-const toast = ref(null)
 const checkedFlg = ref(false)
 
 defineProps({
@@ -56,7 +56,7 @@ const deleteTodo = (id) => {
   });
   localStorage.setItem("message", JSON.stringify(currents));
   showTodoList();
-  toast.value.makeToast()
+  show('Deleted!', {pos: 'top-center', delay: 100, value: 1000})
 };
 
 const checkAllTodos = () => {
@@ -97,6 +97,7 @@ const deleteTodos = () => {
 
 
 <template>
+  <BToaster />
   <div class="li">
     <ToastFeature
       ref="toast"
