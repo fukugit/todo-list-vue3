@@ -47,7 +47,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
-
+      - run: git config user.name github-actions
+      - run: git config user.email github-actions@github.com
+      - run: git pull
       - run: git checkout -b gh-pages origin/gh-pages
       - run: git reset --hard main
       - run: npm ci
