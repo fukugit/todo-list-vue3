@@ -22,13 +22,14 @@
         </BCardText>
       </BCard>
 
-      <BCard title="Acknowledgement" img-alt="Image" img-top>
+      <BCard title="" img-alt="Image" img-top>
+        <template #header>
+          <small class="text-body-secondary">Acknowledgement</small>
+        </template>
         <BCardText>
           This card has supporting text below as a natural lead-in to additional content.
         </BCardText>
-        <template #footer>
-          <small class="text-body-secondary">Last updated 3 mins ago</small>
-        </template>
+
       </BCard>
 
       <BCard title="Snippets for Vue3" img-alt="Image" img-top>

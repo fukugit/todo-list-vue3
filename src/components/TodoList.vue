@@ -6,7 +6,14 @@ import { useToast } from 'bootstrap-vue-next';
 const {show} = useToast()
 
 let messages = ref([])
-messages.value = JSON.parse(localStorage.getItem('message'));
+let currents = JSON.parse(localStorage.getItem('message'));
+messages.value.slice(0, currents.length);
+if (currents != null) {
+  // sort by id with descending order
+  currents.sort((a,b) =>   b.id - a.id);
+}
+messages.value = currents;
+
 
 const deletes = ref([])
 const isAllDeleted = ref(false);
@@ -39,7 +46,7 @@ const showTodoList = () => {
   messages.value.slice(0, currents.length);
   if (currents != null) {
     // sort by id with descending order
-    currents.sort((a,b) =>  b.id - a.id);
+    currents.sort((a,b) =>   b.id - a.id);
   }
   messages.value = currents;
 };
@@ -59,6 +66,18 @@ const deleteTodo = (id) => {
   show('Deleted!', {pos: 'top-center', delay: 100, value: 1000})
 };
 
+const markDone = (id) => {
+  let currents = JSON.parse(localStorage.getItem('message'));
+  currents.forEach((message) =>{
+    if (message.id == id) {
+      message.isActive = !message.isActive;
+    }
+  });
+  localStorage.setItem("message", JSON.stringify(currents));
+  showTodoList();
+};
+
+
 const checkAllTodos = () => {
   checkedFlg.value = !checkedFlg.value
   if (checkedFlg.value) {
@@ -72,8 +91,9 @@ const checkAllTodos = () => {
 };
 
 
+let all_message = JSON.parse(localStorage.getItem('message'));
+
 const deleteTodos = () => {
-  let all_message = JSON.parse(localStorage.getItem('message'));
   if (deletes.value.length == all_message.length) {
     isAllDeleted.value = true;
   }
@@ -93,6 +113,7 @@ const deleteTodos = () => {
     messages.value = currents;
   }
 };
+
 </script>
 
 
@@ -118,16 +139,16 @@ const deleteTodos = () => {
         >
           <li v-if="todo.id == messageId" :id="todo.id">
             <input type="checkbox" :value="todo.id" v-model="deletes">
-            {{todo.message }}
-            <button type="button" class="btn btn-primary me-1">Done</button>
+            <div class="message" :class="{'message-line': todo.isActive}">{{todo.message }}</div>
+            <button type="button" class="btn btn-primary me-1" @click="markDone(todo.id)">Done</button>
             <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
           </li>
         </transition>
 
         <li v-if="todo.id != messageId" :id="todo.id">
           <input type="checkbox" :value="todo.id" v-model="deletes">
-          {{todo.message }}
-          <button type="button" class="btn btn-primary me-1">Done</button>
+          <div class="message" :class="{'message-line': todo.isActive}">{{todo.message }}</div>
+          <button type="button" class="btn btn-primary me-1" @click="markDone(todo.id)">Done</button>
           <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
         </li>
       </ul>
@@ -154,5 +175,13 @@ const deleteTodos = () => {
   }
   input[type=checkbox] {
     transform: scale(1.5);
+  }
+  .message {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: inline;
+  }
+  .message-line {
+    text-decoration: line-through;
   }
 </style>

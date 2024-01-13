@@ -20,7 +20,8 @@ const addTodo = () => {
   messages.push(
     {
       id: id,
-      message: messageInput.value
+      message: messageInput.value,
+      isActive: false
     }
   );
   localStorage.setItem("message", JSON.stringify(messages));
