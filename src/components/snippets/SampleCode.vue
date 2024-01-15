@@ -43,11 +43,11 @@
 <script setup>
 import TodoHeader from "../TodoHeader.vue";
 import TodoFooter from "../TodoFooter.vue";
-import AnimeSamples from "../AnimeSample.vue";
-import CustomDirective from "../CustomDirective.vue";
-import BarChart from "../BarChart.vue";
-import BootStrap from "../BootStrap.vue";
-import CheatSheet from "../CheatSheet.vue";
+import AnimeSamples from "./AnimeSample.vue";
+import CustomDirective from "./CustomDirective.vue";
+import BarChart from "./BarChart.vue";
+import BootStrap from "./BootStrap.vue";
+import CheatSheet from "./CheatSheet.vue";
 
 </script>
 

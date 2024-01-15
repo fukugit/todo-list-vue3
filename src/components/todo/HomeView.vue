@@ -31,8 +31,8 @@
 import { ref } from 'vue';
 
 import TodoHeader from "../TodoHeader.vue";
-import TodoInput from "../TodoInput.vue";
-import TodoList from "../TodoList.vue";
+import TodoInput from "./TodoInput.vue";
+import TodoList from "./TodoList.vue";
 import TodoFooter from "../TodoFooter.vue";
 
 let message = ref("");
