@@ -6,7 +6,10 @@ import { useToast } from 'bootstrap-vue-next';
 const {show} = useToast()
 
 let messages = ref([])
-let currents = JSON.parse(localStorage.getItem('message'));
+let currents = JSON.parse(localStorage.getItem('todos'));
+if (currents == null) {
+    currents = []
+}
 messages.value.slice(0, currents.length);
 if (currents != null) {
   // sort by id with descending order
@@ -42,7 +45,10 @@ const showTodoList = () => {
     messages.value = [];
   }
 
-  let currents = JSON.parse(localStorage.getItem('message'));
+  let currents = JSON.parse(localStorage.getItem('todos'));
+  if (currents == null) {
+    currents = []
+  }
   messages.value.slice(0, currents.length);
   if (currents != null) {
     // sort by id with descending order
@@ -55,25 +61,25 @@ defineExpose({
 });
 
 const deleteTodo = (id) => {
-  let currents = JSON.parse(localStorage.getItem('message'));
+  let currents = JSON.parse(localStorage.getItem('todos'));
   currents.forEach((message, index) =>{
     if (message.id == id) {
       currents.splice(index, 1);
     }
   });
-  localStorage.setItem("message", JSON.stringify(currents));
+  localStorage.setItem("todos", JSON.stringify(currents));
   showTodoList();
   show('Deleted!', {pos: 'top-center', delay: 100, value: 1000})
 };
 
 const markDone = (id) => {
-  let currents = JSON.parse(localStorage.getItem('message'));
+  let currents = JSON.parse(localStorage.getItem('todos'));
   currents.forEach((message) =>{
     if (message.id == id) {
       message.isActive = !message.isActive;
     }
   });
-  localStorage.setItem("message", JSON.stringify(currents));
+  localStorage.setItem("todos", JSON.stringify(currents));
   showTodoList();
 };
 
@@ -81,7 +87,7 @@ const markDone = (id) => {
 const checkAllTodos = () => {
   checkedFlg.value = !checkedFlg.value
   if (checkedFlg.value) {
-    const currents = JSON.parse(localStorage.getItem('message'));
+    const currents = JSON.parse(localStorage.getItem('todos'));
     currents.forEach((message) =>{
       deletes.value.push(message.id)
     });
@@ -91,25 +97,25 @@ const checkAllTodos = () => {
 };
 
 
-let all_message = JSON.parse(localStorage.getItem('message'));
+let all_message = JSON.parse(localStorage.getItem('todos'));
 
 const deleteTodos = () => {
   if (deletes.value.length == all_message.length) {
     isAllDeleted.value = true;
   }
   deletes.value.forEach((delId) => {
-    let currents = JSON.parse(localStorage.getItem('message'));
+    let currents = JSON.parse(localStorage.getItem('todos'));
     currents.forEach((message, index) =>{
       if (message.id == delId) {
         currents.splice(index, 1);
       }
     });
-    localStorage.setItem("message", JSON.stringify(currents));
+    localStorage.setItem("todos", JSON.stringify(currents));
   })
   if (!isAllDeleted.value) {
     showTodoList();
   } else {
-    const currents = JSON.parse(localStorage.getItem('message'));
+    const currents = JSON.parse(localStorage.getItem('todos'));
     messages.value = currents;
   }
 };

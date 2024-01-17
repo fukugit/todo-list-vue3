@@ -12,19 +12,19 @@ const addTodo = () => {
     return;
   }
 
-  let messages = JSON.parse(localStorage.getItem('message'));
-  if (messages == null) {
-    messages = [];
+  let todos = JSON.parse(localStorage.getItem('todos'));
+  if (todos == null) {
+    todos = [];
   }
   const id = new Date().getTime();
-  messages.push(
+  todos.push(
     {
       id: id,
       message: messageInput.value,
       isActive: false
     }
   );
-  localStorage.setItem("message", JSON.stringify(messages));
+  localStorage.setItem("todos", JSON.stringify(todos));
 
   messageId.value = id;
   emit('set-message',messageInput, messageId);
