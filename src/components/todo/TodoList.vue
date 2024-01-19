@@ -5,17 +5,17 @@ import { defineExpose } from 'vue';
 import { useToast } from 'bootstrap-vue-next';
 const {show} = useToast()
 
-let messages = ref([])
+let todos = ref([])
 let currents = JSON.parse(localStorage.getItem('todos'));
 if (currents == null) {
     currents = []
 }
-messages.value.slice(0, currents.length);
+todos.value.slice(0, currents.length);
 if (currents != null) {
   // sort by id with descending order
   currents.sort((a,b) =>   b.id - a.id);
 }
-messages.value = currents;
+todos.value = currents;
 
 
 const deletes = ref([])
@@ -41,20 +41,20 @@ defineProps({
 const showTodoList = () => {
   // Initialized
   isAllDeleted.value = false
-  if (messages.value == null) {
-    messages.value = [];
+  if (todos.value == null) {
+    todos.value = [];
   }
 
   let currents = JSON.parse(localStorage.getItem('todos'));
   if (currents == null) {
     currents = []
   }
-  messages.value.slice(0, currents.length);
+  todos.value.slice(0, currents.length);
   if (currents != null) {
     // sort by id with descending order
     currents.sort((a,b) =>   b.id - a.id);
   }
-  messages.value = currents;
+  todos.value = currents;
 };
 defineExpose({
   showTodoList,
@@ -62,8 +62,8 @@ defineExpose({
 
 const deleteTodo = (id) => {
   let currents = JSON.parse(localStorage.getItem('todos'));
-  currents.forEach((message, index) =>{
-    if (message.id == id) {
+  currents.forEach((todo, index) =>{
+    if (todo.id == id) {
       currents.splice(index, 1);
     }
   });
@@ -74,9 +74,9 @@ const deleteTodo = (id) => {
 
 const markDone = (id) => {
   let currents = JSON.parse(localStorage.getItem('todos'));
-  currents.forEach((message) =>{
-    if (message.id == id) {
-      message.isActive = !message.isActive;
+  currents.forEach((todo) =>{
+    if (todo.id == id) {
+      todo.isActive = !todo.isActive;
     }
   });
   localStorage.setItem("todos", JSON.stringify(currents));
@@ -88,8 +88,8 @@ const checkAllTodos = () => {
   checkedFlg.value = !checkedFlg.value
   if (checkedFlg.value) {
     const currents = JSON.parse(localStorage.getItem('todos'));
-    currents.forEach((message) =>{
-      deletes.value.push(message.id)
+    currents.forEach((todo) =>{
+      deletes.value.push(todo.id)
     });
   } else {
     deletes.value = []
@@ -97,16 +97,16 @@ const checkAllTodos = () => {
 };
 
 
-let all_message = JSON.parse(localStorage.getItem('todos'));
+let all_todos = JSON.parse(localStorage.getItem('todos'));
 
 const deleteTodos = () => {
-  if (deletes.value.length == all_message.length) {
+  if (deletes.value.length == all_todos.length) {
     isAllDeleted.value = true;
   }
   deletes.value.forEach((delId) => {
     let currents = JSON.parse(localStorage.getItem('todos'));
-    currents.forEach((message, index) =>{
-      if (message.id == delId) {
+    currents.forEach((todo, index) =>{
+      if (todo.id == delId) {
         currents.splice(index, 1);
       }
     });
@@ -116,7 +116,7 @@ const deleteTodos = () => {
     showTodoList();
   } else {
     const currents = JSON.parse(localStorage.getItem('todos'));
-    messages.value = currents;
+    todos.value = currents;
   }
 };
 
@@ -137,7 +137,7 @@ const deleteTodos = () => {
           All TODOs were removed!
         </p>
       </transition>
-      <ul v-for="(todo) in messages" :key="todo.id">
+      <ul v-for="(todo) in todos" :key="todo.id">
         <transition
           type="animation"
           enter-active-class="animate__animated animate__bounce"
