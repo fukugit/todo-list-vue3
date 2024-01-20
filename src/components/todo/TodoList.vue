@@ -138,25 +138,27 @@ const deleteTodos = () => {
         </p>
       </transition>
       <ul v-for="(todo) in todos" :key="todo.id">
-        <transition
-          type="animation"
-          enter-active-class="animate__animated animate__bounce"
-          appear
-        >
-          <li v-if="todo.id == messageId" :id="todo.id">
+          <li :id="todo.id">
             <input type="checkbox" :value="todo.id" v-model="deletes">
-            <div class="message" :class="{'message-line': todo.isActive}">{{todo.message }}</div>
+            <transition
+              type="animation"
+              enter-active-class="animate__animated animate__bounce"
+              appear
+            >
+              <div v-if="todo.id == messageId"
+                class="message" 
+                :class="{'message-line': todo.isActive}">
+                {{todo.message }}
+              </div>
+           </transition>
+            <div v-if="todo.id != messageId"
+              class="message"
+              :class="{'message-line': todo.isActive}">
+              {{todo.message }}
+            </div>
             <button type="button" class="btn btn-primary me-1" @click="markDone(todo.id)">Done</button>
             <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
           </li>
-        </transition>
-
-        <li v-if="todo.id != messageId" :id="todo.id">
-          <input type="checkbox" :value="todo.id" v-model="deletes">
-          <div class="message" :class="{'message-line': todo.isActive}">{{todo.message }}</div>
-          <button type="button" class="btn btn-primary me-1" @click="markDone(todo.id)">Done</button>
-          <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
-        </li>
       </ul>
     </div>
   </div>
@@ -185,7 +187,7 @@ const deleteTodos = () => {
   .message {
     margin-left: 10px;
     margin-right: 10px;
-    display: inline;
+    display: inline-block;
   }
   .message-line {
     text-decoration: line-through;
