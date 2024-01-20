@@ -2,8 +2,10 @@
 import { ref } from 'vue';
 import { defineProps } from 'vue';
 import { defineExpose } from 'vue';
-import { useToast } from 'bootstrap-vue-next';
-const {show} = useToast()
+// import { useToast } from 'bootstrap-vue-next';
+import DeleteButton from './parts/DeleteButton.vue';
+
+// const {show} = useToast()
 
 let todos = ref([])
 let currents = JSON.parse(localStorage.getItem('todos'));
@@ -60,17 +62,17 @@ defineExpose({
   showTodoList,
 });
 
-const deleteTodo = (id) => {
-  let currents = JSON.parse(localStorage.getItem('todos'));
-  currents.forEach((todo, index) =>{
-    if (todo.id == id) {
-      currents.splice(index, 1);
-    }
-  });
-  localStorage.setItem("todos", JSON.stringify(currents));
-  showTodoList();
-  show('Deleted!', {pos: 'top-center', delay: 100, value: 1000})
-};
+// const deleteTodo = (id) => {
+//   let currents = JSON.parse(localStorage.getItem('todos'));
+//   currents.forEach((todo, index) =>{
+//     if (todo.id == id) {
+//       currents.splice(index, 1);
+//     }
+//   });
+//   localStorage.setItem("todos", JSON.stringify(currents));
+//   showTodoList();
+//   show('Deleted!', {pos: 'top-center', delay: 100, value: 1000})
+// };
 
 const markDone = (id) => {
   let currents = JSON.parse(localStorage.getItem('todos'));
@@ -157,7 +159,8 @@ const deleteTodos = () => {
               {{todo.message }}
             </div>
             <button type="button" class="btn btn-primary me-1" @click="markDone(todo.id)">Done</button>
-            <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button>
+            <!-- <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button> -->
+            <DeleteButton @show-todo-list="showTodoList" :messageId="todo.id"></DeleteButton>
           </li>
       </ul>
     </div>
