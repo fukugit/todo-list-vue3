@@ -15,7 +15,7 @@
       <div class="row mb-1">
         <div class="col-12">
           <!-- props -->
-          <TodoList ref="todoListRef" :message="message" :messageId="id" :isRemovedFlag="isRemovedFlag"></TodoList>
+          <TodoList ref="todoListRef" :message="message" :messageId="id"></TodoList>
         </div>
       </div>
       <div class="row mb-1">
@@ -37,7 +37,7 @@ import TodoFooter from "../TodoFooter.vue";
 
 let message = ref("");
 let id = ref(0);
-let isRemovedFlag = ref(false);
+// let isRemovedFlag = ref(false);
 const todoListRef = ref();
 
 const setMessage = (messageInput, messageId) => {
@@ -46,7 +46,7 @@ const setMessage = (messageInput, messageId) => {
   }
   message.value = messageInput.value;
   id.value = messageId.value;
-  isRemovedFlag.value = false;
+  // isRemovedFlag.value = false;
   showTodoList();
 };
 

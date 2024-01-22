@@ -2,10 +2,11 @@
 import { ref } from 'vue';
 import { defineProps } from 'vue';
 import { defineExpose } from 'vue';
-// import { useToast } from 'bootstrap-vue-next';
+import { useToast } from 'bootstrap-vue-next';
 import DeleteButton from './parts/DeleteButton.vue';
+import DoneButton from './parts/DoneButton.vue';
 
-// const {show} = useToast()
+const {show} = useToast()
 
 let todos = ref([])
 let currents = JSON.parse(localStorage.getItem('todos'));
@@ -33,11 +34,6 @@ defineProps({
     type: Number,
     requirerd: true,
   },
-  isRemovedFlag: {
-    type: Boolean,
-    default: false,
-    requirerd: false,
-  }
 });
 
 const showTodoList = () => {
@@ -62,29 +58,10 @@ defineExpose({
   showTodoList,
 });
 
-// const deleteTodo = (id) => {
-//   let currents = JSON.parse(localStorage.getItem('todos'));
-//   currents.forEach((todo, index) =>{
-//     if (todo.id == id) {
-//       currents.splice(index, 1);
-//     }
-//   });
-//   localStorage.setItem("todos", JSON.stringify(currents));
-//   showTodoList();
-//   show('Deleted!', {pos: 'top-center', delay: 100, value: 1000})
-// };
-
-const markDone = (id) => {
-  let currents = JSON.parse(localStorage.getItem('todos'));
-  currents.forEach((todo) =>{
-    if (todo.id == id) {
-      todo.isActive = !todo.isActive;
-    }
-  });
-  localStorage.setItem("todos", JSON.stringify(currents));
-  showTodoList();
-};
-
+const showToast = () => {
+  show('Deleted!', {pos: 'top-center', delay: 100, value: 1000})
+  showTodoList()
+}
 
 const checkAllTodos = () => {
   checkedFlg.value = !checkedFlg.value
@@ -158,9 +135,8 @@ const deleteTodos = () => {
               :class="{'message-line': todo.isActive}">
               {{todo.message }}
             </div>
-            <button type="button" class="btn btn-primary me-1" @click="markDone(todo.id)">Done</button>
-            <!-- <button type="button" class="btn btn-primary" @click="deleteTodo(todo.id)">Delete</button> -->
-            <DeleteButton @show-todo-list="showTodoList" :messageId="todo.id"></DeleteButton>
+            <DoneButton @show-todo-list="showTodoList" :messageId="todo.id"></DoneButton>
+            <DeleteButton @show-toast="showToast" :messageId="todo.id"></DeleteButton>
           </li>
       </ul>
     </div>

@@ -9,23 +9,23 @@ defineProps({
   },
 });
 
-const emit = defineEmits(['show-toast']);
+const emit = defineEmits(['show-todo-list']);
 
-const deleteTodo = (id) => {
+const markDone = (id) => {
   let currents = JSON.parse(localStorage.getItem('todos'));
-  currents.forEach((todo, index) =>{
+  currents.forEach((todo) =>{
     if (todo.id == id) {
-      currents.splice(index, 1);
+      todo.isActive = !todo.isActive;
     }
   });
   localStorage.setItem("todos", JSON.stringify(currents));
-  emit('show-toast');
+  emit('show-todo-list');
 };
 </script>
 
 
 <template>
-  <button type="button" class="btn btn-primary me-1" @click="deleteTodo(messageId)">Delete</button>
+  <button type="button" class="btn btn-primary me-1" @click="markDone(messageId)">Done</button>
 </template>
 
 <style scoped>
