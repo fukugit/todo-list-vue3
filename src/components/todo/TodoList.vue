@@ -5,6 +5,8 @@ import { defineExpose } from 'vue';
 import { useToast } from 'bootstrap-vue-next';
 import DeleteButton from './parts/DeleteButton.vue';
 import DoneButton from './parts/DoneButton.vue';
+import DeleteAllButton from './parts/DeleteAllButton.vue';
+import AllSelectButton from './parts/AllSelectButton.vue';
 
 const {show} = useToast()
 
@@ -13,7 +15,6 @@ let currents = JSON.parse(localStorage.getItem('todos'));
 if (currents == null) {
     currents = []
 }
-todos.value.slice(0, currents.length);
 if (currents != null) {
   // sort by id with descending order
   currents.sort((a,b) =>   b.id - a.id);
@@ -23,7 +24,6 @@ todos.value = currents;
 
 const deletes = ref([])
 const isAllDeleted = ref(false);
-const checkedFlg = ref(false)
 
 defineProps({
   message:{
@@ -36,69 +36,29 @@ defineProps({
   },
 });
 
-const showTodoList = () => {
-  // Initialized
-  isAllDeleted.value = false
-  if (todos.value == null) {
-    todos.value = [];
-  }
-
+const showTodoList = (...args) => {
+  isAllDeleted.value = args[0]
   let currents = JSON.parse(localStorage.getItem('todos'));
   if (currents == null) {
     currents = []
-  }
-  todos.value.slice(0, currents.length);
-  if (currents != null) {
+  } else  {
     // sort by id with descending order
     currents.sort((a,b) =>   b.id - a.id);
   }
   todos.value = currents;
-};
+}
 defineExpose({
   showTodoList,
-});
+})
+
+const showDeleteTodoList = (...args) => {
+  deletes.value = args[0]
+}
 
 const showToast = () => {
   show('Deleted!', {pos: 'top-center', delay: 100, value: 1000})
   showTodoList()
 }
-
-const checkAllTodos = () => {
-  checkedFlg.value = !checkedFlg.value
-  if (checkedFlg.value) {
-    const currents = JSON.parse(localStorage.getItem('todos'));
-    currents.forEach((todo) =>{
-      deletes.value.push(todo.id)
-    });
-  } else {
-    deletes.value = []
-  }
-};
-
-
-let all_todos = JSON.parse(localStorage.getItem('todos'));
-
-const deleteTodos = () => {
-  if (deletes.value.length == all_todos.length) {
-    isAllDeleted.value = true;
-  }
-  deletes.value.forEach((delId) => {
-    let currents = JSON.parse(localStorage.getItem('todos'));
-    currents.forEach((todo, index) =>{
-      if (todo.id == delId) {
-        currents.splice(index, 1);
-      }
-    });
-    localStorage.setItem("todos", JSON.stringify(currents));
-  })
-  if (!isAllDeleted.value) {
-    showTodoList();
-  } else {
-    const currents = JSON.parse(localStorage.getItem('todos'));
-    todos.value = currents;
-  }
-};
-
 </script>
 
 
@@ -109,8 +69,8 @@ const deleteTodos = () => {
       ref="toast"
     />
     <div>
-      <button type="button" class="btn btn-primary me-1 mb-1" @click="checkAllTodos()">Select All</button>
-      <button type="button" class="btn btn-primary me-1 mb-1" @click="deleteTodos()">Delete</button>
+      <AllSelectButton @show-delete-todo-list="showDeleteTodoList"></AllSelectButton>
+      <DeleteAllButton @show-todo-list="showTodoList" :messageIds="deletes"></DeleteAllButton>
       <transition name="fade">
         <p v-if="isAllDeleted">
           All TODOs were removed!
