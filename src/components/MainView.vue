@@ -30,10 +30,10 @@
 <script setup>
 import { ref } from 'vue';
 
-import TodoHeader from "../TodoHeader.vue";
-import TodoInput from "./TodoInput.vue";
-import TodoList from "./TodoList.vue";
-import TodoFooter from "../TodoFooter.vue";
+import TodoHeader from "./TodoHeader.vue";
+import TodoInput from "./todo/TodoInput.vue";
+import TodoList from "./todo/TodoList.vue";
+import TodoFooter from "./TodoFooter.vue";
 
 let message = ref("");
 let id = ref(0);
