@@ -25,7 +25,7 @@ const markDone = (id) => {
 
 
 <template>
-  <button type="button" class="btn btn-primary me-1" @click="markDone(messageId)">Done</button>
+  <button type="button" class="btn btn-secondary me-1" @click="markDone(messageId)">Done</button>
 </template>
 
 <style scoped>

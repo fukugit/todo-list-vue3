@@ -20,7 +20,7 @@ const checkAllTodos = () => {
 
 
 <template>
-  <button type="button" class="btn btn-primary me-1 mb-1" @click="checkAllTodos()">Select All</button>
+  <button type="button" class="btn btn-secondary me-1 mb-1" @click="checkAllTodos()">Select All</button>
 </template>
 
 <style scoped>

@@ -25,7 +25,7 @@ const deleteTodo = (id) => {
 
 
 <template>
-  <button type="button" class="btn btn-primary me-1" @click="deleteTodo(messageId)">Delete</button>
+  <button type="button" class="btn btn-secondary me-1" @click="deleteTodo(messageId)">Delete</button>
 </template>
 
 <style scoped>

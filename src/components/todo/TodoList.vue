@@ -64,13 +64,15 @@ const showToast = () => {
 
 <template>
   <BToaster />
-  <div class="li">
+  <div class="frame">
+    <AllSelectButton @show-delete-todo-list="showDeleteTodoList"></AllSelectButton>
+    <DeleteAllButton @show-todo-list="showTodoList" :messageIds="deletes"></DeleteAllButton>
+  </div>
+  <div class="frame">
     <ToastFeature
       ref="toast"
     />
     <div>
-      <AllSelectButton @show-delete-todo-list="showDeleteTodoList"></AllSelectButton>
-      <DeleteAllButton @show-todo-list="showTodoList" :messageIds="deletes"></DeleteAllButton>
       <transition name="fade">
         <p v-if="isAllDeleted">
           All TODOs were removed!
@@ -78,25 +80,33 @@ const showToast = () => {
       </transition>
       <ul v-for="(todo) in todos" :key="todo.id">
           <li :id="todo.id">
-            <input type="checkbox" :value="todo.id" v-model="deletes">
-            <transition
-              type="animation"
-              enter-active-class="animate__animated animate__bounce"
-              appear
-            >
-              <div v-if="todo.id == messageId"
-                class="message" 
-                :class="{'message-line': todo.isActive}">
-                {{todo.message }}
+            <div class="row">
+              <div class="col-8 message_bg">
+                <input type="checkbox" :value="todo.id" v-model="deletes">
+                <transition
+                  type="animation"
+                  enter-active-class="animate__animated animate__bounce"
+                  appear
+                >
+                  <div v-if="todo.id == messageId"
+                    class="message" 
+                    :class="{'message-line': todo.isActive}">
+                    {{todo.message }}
+                  </div>
+                </transition>
+                <div v-if="todo.id != messageId"
+                  class="message"
+                  :class="{'message-line': todo.isActive}">
+                  {{todo.message }}
+                </div>
               </div>
-           </transition>
-            <div v-if="todo.id != messageId"
-              class="message"
-              :class="{'message-line': todo.isActive}">
-              {{todo.message }}
+              <div class="col-1 me-1">
+                <DoneButton @show-todo-list="showTodoList" :messageId="todo.id"></DoneButton>
+              </div>
+              <div class="col-1">
+                <DeleteButton @show-toast="showToast" :messageId="todo.id"></DeleteButton>
+              </div>
             </div>
-            <DoneButton @show-todo-list="showTodoList" :messageId="todo.id"></DoneButton>
-            <DeleteButton @show-toast="showToast" :messageId="todo.id"></DeleteButton>
           </li>
       </ul>
     </div>
@@ -107,8 +117,8 @@ const showToast = () => {
   ul {
     list-style: none;
   }
-  .li {
-    border: yellowgreen solid;
+  .frame {
+    border: rgba(127, 131, 120, 0.211) solid;
     padding: 10px;
     margin-bottom: 10px;
   }
@@ -124,11 +134,16 @@ const showToast = () => {
     transform: scale(1.5);
   }
   .message {
+    margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
     display: inline-block;
   }
+  .message_bg {
+    background-color: rgb(230, 234, 234);
+  }
   .message-line {
+    background-color: gray;
     text-decoration: line-through;
   }
 </style>
