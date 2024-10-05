@@ -7,6 +7,7 @@ import DeleteButton from './parts/DeleteButton.vue';
 import DoneButton from './parts/DoneButton.vue';
 import DeleteAllButton from './parts/DeleteAllButton.vue';
 import AllSelectButton from './parts/AllSelectButton.vue';
+import { annotate } from 'rough-notation';
 
 const {show} = useToast()
 
@@ -59,6 +60,30 @@ const showToast = () => {
   show('Deleted!', {pos: 'top-center', delay: 100, value: 1000})
   showTodoList()
 }
+
+
+// transition
+const beforeEnter = () => {
+}
+const enter = () => {
+}
+const afterEnter = (el) => {
+  // rough-notation
+  const annotation1 = annotate(el, { type: 'box', color: '#db7093', animationDuration: 50 })
+  annotation1.show()
+}
+const enterCanceled = () => {
+}
+const beforeLeave = () => {
+}
+const leave = (el) => {
+  const annotation1 = annotate(el, { animationDuration: 0 })
+  annotation1.hide()
+}
+const afterLeave = () => {
+}
+const leaveCanceled = () => {
+}
 </script>
 
 
@@ -83,13 +108,25 @@ const showToast = () => {
             <div class="row">
               <div class="col-8 message_bg">
                 <input type="checkbox" :value="todo.id" v-model="deletes">
+                <!--
+                  Animate.css
+                  rough-notation
+                -->
                 <transition
                   type="animation"
                   enter-active-class="animate__animated animate__bounce"
+                  @before-enter="beforeEnter"
+                  @enter="enter"
+                  @after-enter="afterEnter"
+                  @enter-canceled="enterCanceled"
+                  @before-leave="beforeLeave"
+                  @leave="leave"
+                  @after-leave="afterLeave"
+                  @leave-canceled="leaveCanceled"
                   appear
                 >
                   <div v-if="todo.id == messageId"
-                    class="message" 
+                    class="message"
                     :class="{'message-line': todo.isActive}">
                     {{todo.message }}
                   </div>
