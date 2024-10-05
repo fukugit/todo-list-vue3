@@ -57,7 +57,7 @@ const showDeleteTodoList = (...args) => {
 }
 
 const showToast = () => {
-  show('Deleted!', {pos: 'top-center', delay: 100, value: 1000})
+  show('Deleted!', {variant: 'info', pos: 'top-center', delay: 50, value: 1000})
   showTodoList()
 }
 
@@ -100,7 +100,7 @@ const leaveCanceled = () => {
     <div>
       <transition name="fade">
         <p v-if="isAllDeleted">
-          All TODOs were removed!
+          All removed!
         </p>
       </transition>
       <ul v-for="(todo) in todos" :key="todo.id">

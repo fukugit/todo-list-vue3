@@ -18,11 +18,11 @@
           <TodoList ref="todoListRef" :message="message" :messageId="id"></TodoList>
         </div>
       </div>
-      <div class="row mb-1">
+      <!-- <div class="row mb-1">
         <div class="col-12">
           <TodoFooter></TodoFooter>
         </div>
-      </div>
+      </div> -->
     </div>
   </div><!-- /.wrapper -->
 </template>
@@ -33,7 +33,8 @@ import { ref } from 'vue';
 import TodoHeader from "./TodoHeader.vue";
 import TodoInput from "./todo/TodoInput.vue";
 import TodoList from "./todo/TodoList.vue";
-import TodoFooter from "./TodoFooter.vue";
+// TODO The TodoFooter should be removed.
+// import TodoFooter from "./TodoFooter.vue";
 
 let message = ref("");
 let id = ref(0);
