@@ -20,8 +20,15 @@ const checkAllTodos = () => {
 
 
 <template>
-  <button type="button" class="btn btn-secondary me-1 mb-1" @click="checkAllTodos()">Select All</button>
+  <!-- <button type="button" class="btn btn-secondary me-1 mb-1" @click="checkAllTodos()">Select All</button> -->
+  <button type="button" class="btn btn-secondary me-1 mb-1" @click="checkAllTodos()">
+      <font-awesome-icon icon="fa-solid fa-check"/>
+  </button>
 </template>
 
 <style scoped>
+  button  {
+    border: none;
+    background-color: aliceblue;
+  }
 </style>

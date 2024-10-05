@@ -15,11 +15,13 @@ import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
 import { faCode } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faDeleteLeft } from '@fortawesome/free-solid-svg-icons'
+import { faHandsClapping } from '@fortawesome/free-solid-svg-icons'
 
 // Google Fonts
 import "@fontsource/open-sans";
 import '@fontsource-variable/unbounded' // https://fontsource.org/fonts/unbounded/install
-
 
 const app = createApp(App);
 app.directive("border", (el) => {
@@ -27,7 +29,7 @@ app.directive("border", (el) => {
 });
 
 /* add fortawesome icons to the library */
-library.add(faGithub, faClipboardCheck, faCode, faPlus)
+library.add(faGithub, faClipboardCheck, faCode, faPlus, faCheck, faDeleteLeft, faHandsClapping)
 
 
 app

@@ -30,8 +30,15 @@ const deleteTodos = (ids) => {
 
 
 <template>
-  <button type="button" class="btn btn-secondary me-1 mb-1" @click="deleteTodos(messageIds)">Delete</button>
+  <!-- <button type="button" class="btn btn-secondary me-1 mb-1" @click="deleteTodos(messageIds)">Delete</button> -->
+  <button type="button" class="btn btn-secondary me-1 mb-1" @click="deleteTodos(messageIds)">
+      <font-awesome-icon icon="fa-solid fa-delete-left"/>
+  </button>
 </template>
 
 <style scoped>
+  button  {
+    border: none;
+    background-color: aliceblue;
+  }
 </style>

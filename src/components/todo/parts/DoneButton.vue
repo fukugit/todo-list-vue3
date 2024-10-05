@@ -25,8 +25,15 @@ const markDone = (id) => {
 
 
 <template>
-  <button type="button" class="btn btn-secondary me-1" @click="markDone(messageId)">Done</button>
+  <!-- <button type="button" class="btn btn-secondary me-1" @click="markDone(messageId)">Done</button> -->
+  <button type="button" class="btn btn-secondary" @click="markDone(messageId)">
+      <font-awesome-icon icon="fa-solid fa-hands-clapping"/>
+  </button>
 </template>
 
 <style scoped>
+  button  {
+    border: none;
+    background-color: aliceblue;
+  }
 </style>

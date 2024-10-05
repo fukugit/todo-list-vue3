@@ -137,11 +137,11 @@ const leaveCanceled = () => {
                   {{todo.message }}
                 </div>
               </div>
-              <div class="col-1 me-1">
-                <DoneButton @show-todo-list="showTodoList" :messageId="todo.id"></DoneButton>
-              </div>
-              <div class="col-1">
-                <DeleteButton @show-toast="showToast" :messageId="todo.id"></DeleteButton>
+              <div class="col-2 me-1">
+                <div class="d-flex">
+                  <DoneButton @show-todo-list="showTodoList" :messageId="todo.id" class="pe-2"></DoneButton>
+                  <DeleteButton @show-toast="showToast" :messageId="todo.id"></DeleteButton>
+                </div>
               </div>
             </div>
           </li>
@@ -155,9 +155,9 @@ const leaveCanceled = () => {
     list-style: none;
   }
   .frame {
-    border: rgba(127, 131, 120, 0.211) solid;
+    /* border: rgba(127, 131, 120, 0.211) solid; */
     padding: 10px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
   }
   .fade-enter-active,
   .fade-leave-active {

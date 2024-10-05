@@ -44,7 +44,7 @@ const addTodo = () => {
 
 <style scoped>
   .frame {
-    border: rgba(127, 131, 120, 0.211) solid;
+    /* border: rgba(127, 131, 120, 0.211) solid; */
     padding: 10px;
     margin-bottom: 10px;
   }

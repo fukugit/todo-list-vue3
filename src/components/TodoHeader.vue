@@ -1,12 +1,12 @@
 <template>
 <div class="container text-left">
   <div class="row">
-    <div class="col-8 pt-2">
+    <div class="col-7 pt-2">
       <div class="title">
         <router-link
           to="/"
           class="h1-link">
-          <h1>Todo List</h1>
+          <h1>ToDo</h1>
         </router-link>
       </div><!-- /.title -->
     </div>
@@ -19,6 +19,9 @@
 
 <style scoped>
 
+  h1 {
+    color: rgb(90, 88, 88);
+  }
   .title {
     font-family: 'Unbounded Variable', sans-serif;
     /* background-color: red; */
